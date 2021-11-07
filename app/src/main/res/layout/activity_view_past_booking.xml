@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBG"
+    tools:context=".ViewPastBooking">
+
+    <TextView
+        android:id="@+id/txt_pastbookingexample_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/averia_serif_libre_light"
+        android:text="@string/label_example_pastbooking"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.181" />
+
+    <TextView
+        android:id="@+id/lbl_bookingid_pastbooking"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="175dp"
+        android:text="@string/label_bookingid"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/txt_pastbookingexample_title"
+        app:layout_constraintStart_toStartOf="@+id/txt_pastbookingexample_title"
+        app:layout_constraintTop_toBottomOf="@+id/txt_pastbookingexample_title" />
+
+    <TextView
+        android:id="@+id/lbl_accommname_pastbooking"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="@string/label_accommnameBooking"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/lbl_bookingid_pastbooking"
+        app:layout_constraintStart_toStartOf="@+id/lbl_bookingid_pastbooking"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_bookingid_pastbooking" />
+
+    <TextView
+        android:id="@+id/lbl_arrdate_pastbooking"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="@string/label_arrdateBooking"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/lbl_accommname_pastbooking"
+        app:layout_constraintStart_toStartOf="@+id/lbl_accommname_pastbooking"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_accommname_pastbooking" />
+
+    <TextView
+        android:id="@+id/lbl_depdate_pastbooking"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="@string/label_depdateBooking"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/lbl_arrdate_pastbooking"
+        app:layout_constraintStart_toStartOf="@+id/lbl_arrdate_pastbooking"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_arrdate_pastbooking" />
+
+    <TextView
+        android:id="@+id/info_bookingid_past"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:text="@string/info_bookingid_pastexample"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/txt_pastbookingexample_title"
+        app:layout_constraintStart_toEndOf="@+id/lbl_bookingid_pastbooking"
+        app:layout_constraintTop_toTopOf="@+id/lbl_bookingid_pastbooking" />
+
+    <TextView
+        android:id="@+id/info_accommname_past"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:text="@string/info_accommname_pastexample"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/txt_pastbookingexample_title"
+        app:layout_constraintStart_toEndOf="@+id/lbl_bookingid_pastbooking"
+        app:layout_constraintTop_toTopOf="@+id/lbl_accommname_pastbooking" />
+
+    <TextView
+        android:id="@+id/info_arrdate_past"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/info_arrdate_pastexample"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/info_accommname_past"
+        app:layout_constraintStart_toEndOf="@+id/lbl_accommname_pastbooking"
+        app:layout_constraintTop_toTopOf="@+id/lbl_arrdate_pastbooking" />
+
+    <TextView
+        android:id="@+id/info_depdate_past"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/info_depdate_pastexample"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/info_arrdate_past"
+        app:layout_constraintStart_toEndOf="@+id/lbl_arrdate_pastbooking"
+        app:layout_constraintTop_toTopOf="@+id/lbl_depdate_pastbooking" />
+
+    <Button
+        android:id="@+id/btn_back_pastbooking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/btnText_prev"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_depdate_pastbooking" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_home"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/greenSecondary"
+        app:itemIconTint="@color/icon_colours"
+        app:itemTextColor="@color/icon_colours"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_menuhome" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

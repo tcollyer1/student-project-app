@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBG"
+    tools:context=".Barn">
+
+    <TextView
+        android:id="@+id/txt_barn_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/averia_serif_libre_light"
+        android:text="@string/title_barn"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.050000012" />
+
+    <ImageView
+        android:id="@+id/img_barn"
+        android:layout_width="357dp"
+        android:layout_height="238dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_barn_title"
+        app:srcCompat="@drawable/barn" />
+
+    <TextView
+        android:id="@+id/lbl_catering_barn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/label_catering"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/lbl_capacity_barn"
+        app:layout_constraintStart_toStartOf="@+id/lbl_capacity_barn"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_capacity_barn" />
+
+    <TextView
+        android:id="@+id/lbl_capacity_barn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="200dp"
+        android:text="@string/label_capacity"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/img_barn"
+        app:layout_constraintStart_toStartOf="@+id/img_barn"
+        app:layout_constraintTop_toBottomOf="@+id/img_barn" />
+
+    <TextView
+        android:id="@+id/capacity_barn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="25dp"
+        android:text="@string/info_capacity_barn"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lbl_capacity_barn"
+        app:layout_constraintTop_toBottomOf="@+id/img_barn" />
+
+    <TextView
+        android:id="@+id/catering_barn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/info_catering_barn"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/capacity_barn"
+        app:layout_constraintStart_toStartOf="@+id/capacity_barn"
+        app:layout_constraintTop_toBottomOf="@+id/capacity_barn" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_home"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/greenSecondary"
+        app:itemIconTint="@color/icon_colours"
+        app:itemTextColor="@color/icon_colours"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_menuhome" />
+
+    <Button
+        android:id="@+id/btn_back_barn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnText_prev"
+        app:layout_constraintBottom_toTopOf="@+id/nav_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/status_barn" />
+
+    <TextView
+        android:id="@+id/lbl_status_barn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/label_status"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/lbl_catering_barn"
+        app:layout_constraintStart_toStartOf="@+id/lbl_catering_barn"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_catering_barn" />
+
+    <TextView
+        android:id="@+id/status_barn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/info_status_all"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/catering_barn"
+        app:layout_constraintStart_toStartOf="@+id/catering_barn"
+        app:layout_constraintTop_toBottomOf="@+id/catering_barn" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

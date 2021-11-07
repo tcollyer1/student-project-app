@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBG"
+    tools:context=".FarmhouseBedrooms">
+
+    <TextView
+        android:id="@+id/txt_farmhousebeds_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/averia_serif_libre_light"
+        android:text="@string/title_farmhousebeds"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.050000012" />
+
+    <TextView
+        android:id="@+id/lbl_catering_fmhouse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/label_catering"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/lbl_capacity_fmhouse"
+        app:layout_constraintStart_toStartOf="@+id/lbl_capacity_fmhouse"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_capacity_fmhouse" />
+
+    <TextView
+        android:id="@+id/lbl_capacity_fmhouse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="200dp"
+        android:text="@string/label_capacity"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/img_fmhousebeds"
+        app:layout_constraintStart_toStartOf="@+id/img_fmhousebeds"
+        app:layout_constraintTop_toBottomOf="@+id/img_fmhousebeds" />
+
+    <ImageView
+        android:id="@+id/img_fmhousebeds"
+        android:layout_width="357dp"
+        android:layout_height="238dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_farmhousebeds_title"
+        app:srcCompat="@drawable/farmhousebed" />
+
+    <TextView
+        android:id="@+id/capacity_fmhouse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="25dp"
+        android:text="@string/info_capacity_fmhouse"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lbl_capacity_fmhouse"
+        app:layout_constraintTop_toBottomOf="@+id/img_fmhousebeds" />
+
+    <TextView
+        android:id="@+id/catering_fmhouse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/info_catering_fmhouse"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/capacity_fmhouse"
+        app:layout_constraintStart_toStartOf="@+id/capacity_fmhouse"
+        app:layout_constraintTop_toBottomOf="@+id/capacity_fmhouse" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+    android:id="@+id/nav_home"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+        android:background="@color/greenSecondary"
+        app:itemIconTint="@color/icon_colours"
+        app:itemTextColor="@color/icon_colours"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:menu="@menu/bottom_menuhome" />
+
+    <Button
+        android:id="@+id/btn_back_fmhouse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnText_prev"
+        app:layout_constraintBottom_toTopOf="@+id/nav_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/status_fmhouse" />
+
+    <TextView
+        android:id="@+id/lbl_status_fmhouse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/label_status"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/lbl_catering_fmhouse"
+        app:layout_constraintStart_toStartOf="@+id/lbl_catering_fmhouse"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_catering_fmhouse" />
+
+    <TextView
+        android:id="@+id/status_fmhouse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/info_status_all"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/catering_fmhouse"
+        app:layout_constraintStart_toStartOf="@+id/catering_fmhouse"
+        app:layout_constraintTop_toBottomOf="@+id/catering_fmhouse" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

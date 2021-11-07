@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/drawable/gradient_bg.xml" value="0.3828125" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_accommodation.xml" value="0.33" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_accommodation_pg2.xml" value="0.33" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_accommodation_pg3.xml" value="0.33" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_barn.xml" value="0.33" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_bookings.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_create_booking.xml" value="0.33" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_create_booking_pg2.xml" value="0.36186594202898553" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_farmhouse_bedrooms.xml" value="0.33" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_main.xml" value="0.36594202898550726" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_shepherds_hut.xml" value="0.33" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_view_current_booking.xml" value="0.2994791666666667" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_view_current_bookings.xml" value="0.36594202898550726" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_view_past_booking.xml" value="0.2994791666666667" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_view_past_bookings.xml" value="0.36594202898550726" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/fragment_create_booking.xml" value="0.36594202898550726" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/fragment_home.xml" value="0.36594202898550726" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/fragment_view_bookings.xml" value="0.36594202898550726" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/menu/bottom_menuhome.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Prototype/app/src/main/res/layout/activity_accommodation.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Prototype/app/src/main/res/layout/activity_create_booking.xml" value="0.33" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Prototype/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Prototype/app/src/main/res/layout/activity_view_current_bookings.xml" value="0.29739583333333336" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Prototype/app/src/main/res/layout/activity_view_past_bookings.xml" value="0.29739583333333336" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

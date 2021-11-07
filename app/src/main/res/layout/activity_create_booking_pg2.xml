@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBG"
+    tools:context=".CreateBookingPg2">
+
+    <TextView
+        android:id="@+id/txt_createbooking_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/averia_serif_libre_light"
+        android:text="@string/title_createbooking"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13" />
+
+    <TextView
+        android:id="@+id/lbl_customername"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/label_customername"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/txt_createbooking_title"
+        app:layout_constraintStart_toStartOf="@+id/txt_createbooking_title"
+        app:layout_constraintTop_toBottomOf="@+id/txt_createbooking_title" />
+
+    <EditText
+        android:id="@+id/input_customername"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/lbl_customername"
+        app:layout_constraintStart_toStartOf="@+id/lbl_customername"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_customername" />
+
+    <TextView
+        android:id="@+id/lbl_phoneno"
+        android:layout_width="0dp"
+        android:layout_height="25sp"
+        android:layout_marginTop="40dp"
+        android:text="@string/label_phoneno"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/input_customername"
+        app:layout_constraintStart_toStartOf="@+id/input_customername"
+        app:layout_constraintTop_toBottomOf="@+id/input_customername" />
+
+    <EditText
+        android:id="@+id/input_phoneno"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="@+id/lbl_phoneno"
+        app:layout_constraintStart_toStartOf="@+id/lbl_phoneno"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_phoneno" />
+
+    <TextView
+        android:id="@+id/lbl_address"
+        android:layout_width="0dp"
+        android:layout_height="25sp"
+        android:layout_marginTop="40dp"
+        android:text="@string/label_address"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/input_phoneno"
+        app:layout_constraintStart_toStartOf="@+id/input_phoneno"
+        app:layout_constraintTop_toBottomOf="@+id/input_phoneno" />
+
+    <EditText
+        android:id="@+id/input_address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPostalAddress"
+        app:layout_constraintEnd_toEndOf="@+id/lbl_address"
+        app:layout_constraintStart_toStartOf="@+id/lbl_address"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_address" />
+
+    <Button
+        android:id="@+id/btn_submitbooking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/btnText_cfmbooking"
+        app:layout_constraintEnd_toEndOf="@+id/input_address"
+        app:layout_constraintStart_toStartOf="@+id/input_address"
+        app:layout_constraintTop_toBottomOf="@+id/input_address" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_home"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/greenSecondary"
+        app:itemIconTint="@color/icon_colours"
+        app:itemTextColor="@color/icon_colours"
+        android:layout_gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_menuhome" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="@string/navTitle_home"
+        android:id="@+id/home_page"
+        android:icon="@drawable/ic_baseline_home_24" />
+    <item
+        android:title="@string/navTitle_addbooking"
+        android:id="@+id/create_booking_page"
+        android:icon="@drawable/ic_baseline_add_circle_outline_24" />
+    <item
+        android:title="@string/navTitle_viewbookings"
+        android:id="@+id/view_bookings_page"
+        android:icon="@drawable/ic_baseline_person_24" />
+
+<!-- For removing selected attribute from bottom nav -->
+    <item
+        android:id="@+id/invisible"
+        android:visible="false" />
+</menu>
