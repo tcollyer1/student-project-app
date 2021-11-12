@@ -37,7 +37,6 @@ public class CreateBookingPg2 extends AppCompatActivity {
                         intent = new Intent (getApplicationContext(), Bookings.class);
                         startActivity(intent);
                         return true;
-
                 }
                 return false;
             }
@@ -47,7 +46,15 @@ public class CreateBookingPg2 extends AppCompatActivity {
         nextPageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (allDetailsPresent()) {
+                EditText customerName = findViewById(R.id.input_customername);
+                EditText phoneNo = findViewById(R.id.input_phoneno);
+                EditText address = findViewById(R.id.input_address);
+
+                CustomerInfo customerInfo = new CustomerInfo(customerName.getText().toString(), address.getText().toString(), phoneNo.getText().toString());
+
+                boolean detailsPresent = allDetailsPresent(customerInfo.getName(), customerInfo.getPhone(), customerInfo.getAddress());
+
+                if (detailsPresent) {
                     displaySuccessSnackbar(nextPageBtn);
                 }
                 else {
@@ -65,14 +72,7 @@ public class CreateBookingPg2 extends AppCompatActivity {
         Snackbar.make(v, "Error: not all fields filled", Snackbar.LENGTH_SHORT).show();
     }
 
-    public boolean allDetailsPresent() {
-        EditText customerName = findViewById(R.id.input_customername);
-        EditText phoneNo = findViewById(R.id.input_phoneno);
-        EditText address = findViewById(R.id.input_address);
-
-        String customerNameTxt = customerName.getText().toString();
-        String phoneNoTxt = phoneNo.getText().toString();
-        String addressTxt = address.getText().toString();
+    public boolean allDetailsPresent(String customerNameTxt, String phoneNoTxt, String addressTxt) {
 
         if ("".equals(phoneNoTxt) || "".equals(addressTxt) || "".equals(customerNameTxt)) {
             return false;

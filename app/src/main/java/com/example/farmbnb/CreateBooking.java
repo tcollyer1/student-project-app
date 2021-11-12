@@ -18,14 +18,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 public class CreateBooking extends AppCompatActivity {
-    public String SHARED_PREFS = "sharedPrefs";
-    public String ACCOMM_NAME = "text";
-    public String ARRIVAL_DATE = "text";
-    public String DEP_DATE = "text";
-
-    private String accommNameTxt;
-    private String arrivalDateTxt;
-    private String departureDateTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +51,19 @@ public class CreateBooking extends AppCompatActivity {
         nextPageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (allDetailsPresent() && datesValid()) {
+                EditText accommName = findViewById(R.id.input_accommname);
+                EditText arrivalDate = findViewById(R.id.input_arrivaldate);
+                EditText departureDate = findViewById(R.id.input_departuredate);
+
+                AccommodationInfo accommInfo = new AccommodationInfo(accommName.getText().toString(), arrivalDate.getText().toString(), departureDate.getText().toString());
+
+                boolean detailsPresent = allDetailsPresent(accommInfo.getAccommName(), accommInfo.getArrivalDate(), accommInfo.getDepartureDate());
+                boolean validDates = datesValid(accommInfo.getArrivalDate(), accommInfo.getDepartureDate());
+
+                if (detailsPresent && validDates) {
                     moveToNextPage();
                 }
-                else if (!allDetailsPresent()) {
+                else if (!detailsPresent) {
                     displayFieldsMissingSnackbar(nextPageBtn);
                 }
                 else {
@@ -85,20 +86,15 @@ public class CreateBooking extends AppCompatActivity {
         Snackbar.make(v, "One or more dates invalid - use format dd/mm/yy and make sure departure is after arrival", Snackbar.LENGTH_SHORT).show();
     }
 
-    public boolean datesValid() {
-        EditText arrivalDate = findViewById(R.id.input_arrivaldate);
-        EditText departureDate = findViewById(R.id.input_departuredate);
-
-        String tempArrivalDateTxt = arrivalDate.getText().toString();
-        String tempDepDateTxt = departureDate.getText().toString();
+    public boolean datesValid(String arrDate, String depDate) {
 
         DateFormat fm = new SimpleDateFormat("dd/MM/yy");
         Date checkArrDate;
         Date checkDepDate;
 
         try {
-            checkArrDate = fm.parse(tempArrivalDateTxt);
-            checkDepDate = fm.parse(tempDepDateTxt);
+            checkArrDate = fm.parse(arrDate);
+            checkDepDate = fm.parse(depDate);
         }
         catch (Exception exception) {
             return false;
@@ -107,14 +103,7 @@ public class CreateBooking extends AppCompatActivity {
         return checkArrDate.before(checkDepDate);
     }
 
-    public boolean allDetailsPresent() {
-        EditText accommName = findViewById(R.id.input_accommname);
-        EditText arrivalDate = findViewById(R.id.input_arrivaldate);
-        EditText departureDate = findViewById(R.id.input_departuredate);
-
-        accommNameTxt = accommName.getText().toString();
-        arrivalDateTxt = arrivalDate.getText().toString();
-        departureDateTxt = departureDate.getText().toString();
+    public boolean allDetailsPresent(String accommNameTxt, String arrivalDateTxt, String departureDateTxt) {
 
         if ("".equals(accommNameTxt) || "".equals(arrivalDateTxt) || "".equals(departureDateTxt)) {
             return false;
