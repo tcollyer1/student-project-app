@@ -14,6 +14,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 public class CreateBookingPg2 extends AppCompatActivity {
+    // Variables to store booking data from the previous page
+    private String accommName;
+    private String arrDate;
+    private String depDate;
+
+    private int customerID = 0; // Would be set according to whatever customer ID the user has (based on their login)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +28,9 @@ public class CreateBookingPg2 extends AppCompatActivity {
 
         BottomNavigationView nav = findViewById(R.id.nav_home);
         nav.setSelectedItemId(R.id.create_booking_page);
+
+        // Get booking info from previous page
+        getBookingInfo();
 
         nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -50,11 +59,15 @@ public class CreateBookingPg2 extends AppCompatActivity {
                 EditText phoneNo = findViewById(R.id.input_phoneno);
                 EditText address = findViewById(R.id.input_address);
 
-                CustomerInfo customerInfo = new CustomerInfo(customerName.getText().toString(), address.getText().toString(), phoneNo.getText().toString());
+                // Store customer details for later external storage
+                Customer customer = new Customer(customerID, customerName.getText().toString(), address.getText().toString(), phoneNo.getText().toString());
 
-                boolean detailsPresent = allDetailsPresent(customerInfo.getName(), customerInfo.getPhone(), customerInfo.getAddress());
+                boolean detailsPresent = allDetailsPresent(customer.getName(), customer.getPhone(), customer.getAddress());
 
                 if (detailsPresent) {
+                    // Store full booking details in FinalBooking class object for later external storage
+                    FinalBooking customerBooking = new FinalBooking(customerID, accommName, arrDate, depDate);
+
                     displaySuccessSnackbar(nextPageBtn);
                 }
                 else {
@@ -65,7 +78,8 @@ public class CreateBookingPg2 extends AppCompatActivity {
     }
 
     public void displaySuccessSnackbar(View v) {
-        Snackbar.make(v, "Booking created!", Snackbar.LENGTH_SHORT).show();
+        String msg = "Booking created for " + accommName + " on " + arrDate + "!";
+        Snackbar.make(v, msg, Snackbar.LENGTH_SHORT).show();
     }
 
     public void displayFailureSnackbar(View v) {
@@ -78,5 +92,12 @@ public class CreateBookingPg2 extends AppCompatActivity {
             return false;
         }
         else return true;
+    }
+
+    public void getBookingInfo() {
+        Intent intent = getIntent();
+        accommName = intent.getStringExtra("AccommName");
+        arrDate = intent.getStringExtra("ArrivalDate");
+        depDate = intent.getStringExtra("DepartureDate");
     }
 }

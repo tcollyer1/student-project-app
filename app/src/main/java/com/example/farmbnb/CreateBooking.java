@@ -51,17 +51,20 @@ public class CreateBooking extends AppCompatActivity {
         nextPageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Get raw inputs
                 EditText accommName = findViewById(R.id.input_accommname);
                 EditText arrivalDate = findViewById(R.id.input_arrivaldate);
                 EditText departureDate = findViewById(R.id.input_departuredate);
 
-                AccommodationInfo accommInfo = new AccommodationInfo(accommName.getText().toString(), arrivalDate.getText().toString(), departureDate.getText().toString());
+                // Store user's entered inputs for this page in BookingInfo object
+                BookingInfo bookingInfo = new BookingInfo(accommName.getText().toString(), arrivalDate.getText().toString(), departureDate.getText().toString());
 
-                boolean detailsPresent = allDetailsPresent(accommInfo.getAccommName(), accommInfo.getArrivalDate(), accommInfo.getDepartureDate());
-                boolean validDates = datesValid(accommInfo.getArrivalDate(), accommInfo.getDepartureDate());
+                boolean detailsPresent = allDetailsPresent(bookingInfo.getAccommName(), bookingInfo.getArrivalDate(), bookingInfo.getDepartureDate());
+                boolean validDates = datesValid(bookingInfo.getArrivalDate(), bookingInfo.getDepartureDate());
 
                 if (detailsPresent && validDates) {
-                    moveToNextPage();
+                    // Move on to entering customer details
+                    moveToNextPage(bookingInfo);
                 }
                 else if (!detailsPresent) {
                     displayFieldsMissingSnackbar(nextPageBtn);
@@ -73,8 +76,14 @@ public class CreateBooking extends AppCompatActivity {
         });
     }
 
-    public void moveToNextPage() {
+    public void moveToNextPage(BookingInfo booking) {
         Intent intent = new Intent(getApplicationContext(), CreateBookingPg2.class);
+
+        // Send information to next page
+        intent.putExtra("AccommName", booking.getAccommName());
+        intent.putExtra("ArrivalDate", booking.getArrivalDate());
+        intent.putExtra("DepartureDate", booking.getDepartureDate());
+
         startActivity(intent);
     }
 
