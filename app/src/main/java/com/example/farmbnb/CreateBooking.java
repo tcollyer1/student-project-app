@@ -88,7 +88,7 @@ public class CreateBooking extends AppCompatActivity {
     }
 
     public void displayFieldsMissingSnackbar(View v) {
-        Snackbar.make(v, "Please fill in all fields before proceeding.", Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(v, "Error: not all fields filled", Snackbar.LENGTH_SHORT).show();
     }
 
     public void displayInvalidDatesSnackbar(View v) {
