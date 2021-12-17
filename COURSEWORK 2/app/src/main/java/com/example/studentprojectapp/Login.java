@@ -41,7 +41,14 @@ public class Login extends AppCompatActivity {
 
     // Gets if login details are correct
     private boolean validLogin(String id, String password) {
-        if (id.equals("1068")) {
+        if (!id.equals("")) {
+            try {
+                Integer.parseInt(id);
+            }
+            catch (Exception ex) {
+                return false;
+            }
+
             if (password.equals("comp2000")) {
                 return true;
             }
