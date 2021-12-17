@@ -29,8 +29,6 @@ public class Home extends AppCompatActivity {
         TextView welcomeTxt = findViewById(R.id.lbl_welcome_home);
         Switch notifToggle = findViewById(R.id.swt_notificationtoggle);
 
-        //Boolean switchState = notifToggle.isChecked();
-
         // Set switch to on by default
         notifToggle.setChecked(true);
         notifToggle.setText("Notifications ON");
