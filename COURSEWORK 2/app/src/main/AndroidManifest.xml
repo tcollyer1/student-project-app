@@ -14,12 +14,15 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".ProjectDetails"
+            android:parentActivityName=".Home"
             android:exported="false" />
         <activity
             android:name=".UpdateProject"
+            android:parentActivityName=".ProjectDetails"
             android:exported="false" />
         <activity
             android:name=".ViewProjects"
+            android:parentActivityName=".Home"
             android:exported="false" />
         <activity
             android:name=".Home"

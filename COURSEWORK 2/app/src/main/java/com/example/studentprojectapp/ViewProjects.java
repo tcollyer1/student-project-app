@@ -2,11 +2,13 @@ package com.example.studentprojectapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,12 +28,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class ViewProjects extends AppCompatActivity {
-//    private int studentID;
-//    private String title;
-//    private String description;
-//    private int year;
-//    private String first_name;
-//    private String second_name;
     private ArrayList<String> projectHeaders = new ArrayList<>();
     private ArrayList<StudentProject> studentProjects = new ArrayList<>();
 
@@ -42,6 +38,7 @@ public class ViewProjects extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_projects);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         currentStudentID = getStudentID();
 
@@ -52,18 +49,21 @@ public class ViewProjects extends AppCompatActivity {
         catch (Exception ex) {
             Toast.makeText(ViewProjects.this, ex.toString(), Toast.LENGTH_SHORT).show();
         }
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
 
-        //Button detailsBtn = findViewById(R.id.btn_details);
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("studentID", Integer.toString(currentStudentID));
+                setResult(Activity.RESULT_OK, resultIntent);
+                this.finish();
 
-
-
-//        detailsBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                goToProjectDetails();
-//            }
-//        });
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void goToProjectDetails(int index) {
@@ -90,15 +90,11 @@ public class ViewProjects extends AppCompatActivity {
         return studentID;
     }
 
-
-
-
-
-
     public class MyAsyncTasks extends AsyncTask<String, String, String> {
         ProgressDialog progressDialog;
         String textViewStr;
 
+        @Override
         protected void onPreExecute() {
             super.onPreExecute();
             progressDialog = new ProgressDialog(ViewProjects.this);
@@ -107,6 +103,7 @@ public class ViewProjects extends AppCompatActivity {
             progressDialog.show();
         }
 
+        @Override
         protected String doInBackground(String... params) {
             RequestQueue queue = Volley.newRequestQueue(ViewProjects.this);
             String apiURL = "http://web.socem.plymouth.ac.uk/COMP2000/api/students/";
@@ -159,7 +156,7 @@ public class ViewProjects extends AppCompatActivity {
                         }
                     }, new Response.ErrorListener() {
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(ViewProjects.this, "No projects yet...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewProjects.this, "Something went wrong...", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -168,9 +165,10 @@ public class ViewProjects extends AppCompatActivity {
             return null;
         }
 
+        @Override
         protected void onPostExecute(String s) {
             super.onPreExecute();
-            Toast.makeText(ViewProjects.this, "Projects fetched.", Toast.LENGTH_SHORT).show();
+
             progressDialog.dismiss();
         }
     }

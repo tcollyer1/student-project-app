@@ -1,13 +1,18 @@
 package com.example.studentprojectapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ProjectDetails extends AppCompatActivity {
     private StudentProject sp;
@@ -16,12 +21,14 @@ public class ProjectDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_details);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         sp = getProjectInfo();
 
         setEditTexts();
 
         Button updateBtn = findViewById(R.id.btn_update);
+        Button deleteBtn = findViewById(R.id.btn_delete);
 
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,6 +36,34 @@ public class ProjectDetails extends AppCompatActivity {
                 goToUpdateProject();
             }
         });
+
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createDialog();
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+
+                Intent resultIntent = new Intent();
+                //resultIntent.putExtra("projectID", Integer.toString(sp.getProjectID()));
+                resultIntent.putExtra("studentID", Integer.toString(sp.getStudentID()));
+                //resultIntent.putExtra("title", sp.getTitle());
+                //resultIntent.putExtra("description", sp.getDescription());
+                //resultIntent.putExtra("year", Integer.toString(sp.getYear()));
+                //resultIntent.putExtra("first_name", sp.getFirst_name());
+                //resultIntent.putExtra("second_name", sp.getSecond_name());
+                setResult(Activity.RESULT_OK, resultIntent);
+                this.finish();
+
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setEditTexts() {
@@ -77,5 +112,35 @@ public class ProjectDetails extends AppCompatActivity {
         intent.putExtra("second_name", sp.getSecond_name());
 
         startActivity(intent);
+    }
+
+    private void openViewProjects(String studentID) {
+        Context context = getApplicationContext();
+        Intent intent = new Intent(context, ViewProjects.class);
+        intent.putExtra("studentID", studentID);
+        startActivity(intent);
+    }
+
+    private void createDialog() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("Are you sure you want to delete " + sp.getTitle() + "?");
+        dialog.setCancelable(false);
+
+        dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                openViewProjects(Integer.toString(sp.getStudentID()));
+        }
+        });
+
+        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        dialog.create().show();
     }
 }
