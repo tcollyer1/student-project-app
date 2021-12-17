@@ -53,6 +53,7 @@ public class ProjectDetails extends AppCompatActivity {
     private StudentProject getProjectInfo() {
         Intent intent = getIntent();
 
+        int projectID = Integer.parseInt(intent.getStringExtra("projectID"));
         int studentID = Integer.parseInt(intent.getStringExtra("studentID")); // this is iffy
         String title = intent.getStringExtra("title");
         String description = intent.getStringExtra("description");
@@ -60,13 +61,14 @@ public class ProjectDetails extends AppCompatActivity {
         String first_name = intent.getStringExtra("first_name");
         String second_name = intent.getStringExtra("second_name");
 
-        return new StudentProject(studentID, title, description, year, first_name, second_name);
+        return new StudentProject(projectID, studentID, title, description, year, first_name, second_name);
     }
 
     private void goToUpdateProject() {
         Context context = getApplicationContext();
         Intent intent = new Intent(context, UpdateProject.class);
 
+        intent.putExtra("projectID", Integer.toString(sp.getProjectID()));
         intent.putExtra("studentID", Integer.toString(sp.getStudentID()));
         intent.putExtra("title", sp.getTitle());
         intent.putExtra("description", sp.getDescription());

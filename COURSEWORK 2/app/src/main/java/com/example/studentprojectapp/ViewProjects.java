@@ -10,16 +10,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 
@@ -35,17 +32,27 @@ public class ViewProjects extends AppCompatActivity {
 //    private int year;
 //    private String first_name;
 //    private String second_name;
-    private ArrayList<String> projectsList = new ArrayList<>();
+    private ArrayList<String> projectHeaders = new ArrayList<>();
+    private ArrayList<StudentProject> studentProjects = new ArrayList<>();
 
     private StudentProject sp;
+    private int currentStudentID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_projects);
 
-        MyAsyncTasks myAsyncTasks = new MyAsyncTasks();
-        myAsyncTasks.execute();
+        currentStudentID = getStudentID();
+
+        try {
+            MyAsyncTasks myAsyncTasks = new MyAsyncTasks();
+            myAsyncTasks.execute();
+        }
+        catch (Exception ex) {
+            Toast.makeText(ViewProjects.this, ex.toString(), Toast.LENGTH_SHORT).show();
+        }
+
 
         //Button detailsBtn = findViewById(R.id.btn_details);
 
@@ -59,18 +66,28 @@ public class ViewProjects extends AppCompatActivity {
 //        });
     }
 
-    private void goToProjectDetails() {
+    private void goToProjectDetails(int index) {
         Context context = getApplicationContext();
         Intent intent = new Intent(context, ProjectDetails.class);
 
-        intent.putExtra("studentID", Integer.toString(sp.getStudentID()));
-        intent.putExtra("title", sp.getTitle());
-        intent.putExtra("description", sp.getDescription());
-        intent.putExtra("year", Integer.toString(sp.getYear()));
-        intent.putExtra("first_name", sp.getFirst_name());
-        intent.putExtra("second_name", sp.getSecond_name());
+        StudentProject current = studentProjects.get(index);
+
+        intent.putExtra("projectID", Integer.toString(current.getProjectID()));
+        intent.putExtra("studentID", Integer.toString(current.getStudentID()));
+        intent.putExtra("title", current.getTitle());
+        intent.putExtra("description", current.getDescription());
+        intent.putExtra("year", Integer.toString(current.getYear()));
+        intent.putExtra("first_name", current.getFirst_name());
+        intent.putExtra("second_name", current.getSecond_name());
 
         startActivity(intent);
+    }
+
+    private int getStudentID() {
+        Intent intent = getIntent();
+        int studentID = Integer.parseInt(intent.getStringExtra("studentID"));
+
+        return studentID;
     }
 
 
@@ -85,53 +102,46 @@ public class ViewProjects extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             progressDialog = new ProgressDialog(ViewProjects.this);
-            progressDialog.setMessage("Processing data...");
+            progressDialog.setMessage("Fetching projects...");
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
 
         protected String doInBackground(String... params) {
             RequestQueue queue = Volley.newRequestQueue(ViewProjects.this);
-            String apiURL = "http://web.socem.plymouth.ac.uk/COMP2000/api/students/2";
-            //TextView textView = findViewById(R.id.projectDisplay);
+            String apiURL = "http://web.socem.plymouth.ac.uk/COMP2000/api/students/";
 
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, apiURL, null,
-                    new Response.Listener<JSONObject>() {
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, apiURL, null,
+                    new Response.Listener<JSONArray>() {
                         @Override
-                        public void onResponse(JSONObject object) {
+                        public void onResponse(JSONArray response) {
                             try {
-                                //JSONObject object = response.getJSONObject(0);
+                                for (int i = 0; i < response.length(); i++) {
+                                    JSONObject project = response.getJSONObject(i);
 
-                                int studentID;
-                                String title;
-                                String description;
-                                int year;
-                                String first_name;
-                                String second_name;
+                                    int studentID = project.getInt("studentID");
 
-                                //int projID = object.getInt("projectID");
-                                studentID = object.getInt("studentID");
-                                title = object.getString("title");
-                                description = object.getString("description");
-                                year = object.getInt("year");
-                                first_name = object.getString("first_Name");
-                                second_name = object.getString("second_Name");
+                                    if (studentID == currentStudentID) {
+                                        int projectID = project.getInt("projectID");
+                                        String title = project.getString("title");
+                                        String description = project.getString("description");
+                                        int year = project.getInt("year");
+                                        String first_name = project.getString("first_Name");
+                                        String second_name = project.getString("second_Name");
 
-                                sp = new StudentProject(studentID, title, description, year, first_name, second_name);
+                                        sp = new StudentProject(projectID, studentID, title, description, year, first_name, second_name);
 
-                                //String textViewStr = "Student ID: " + studID + ", Title: " + title + ", Description: " + description + ", Year: " + year + ", Full name: " + fName + " " + lName;
-                                textViewStr = title + " (" + year + ")";
+                                        textViewStr = title + " (" + year + ")";
 
-                                //textView.setText(textViewStr);
+                                        projectHeaders.add(textViewStr);
+                                        studentProjects.add(sp);
+                                    }
+                                }
 
                                 // This is the part with the ListView
                                 ListView listView = findViewById(R.id.listview);
 
-                                projectsList.add(textViewStr);
-                                projectsList.add("test proj 1 (2021)");
-                                projectsList.add("test proj 2 (2018)");
-
-                                ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, projectsList);
+                                ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, projectHeaders);
 
                                 listView.setAdapter(adapter);
 
@@ -139,7 +149,7 @@ public class ViewProjects extends AppCompatActivity {
                                     // position = pos of element we're clicking
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        goToProjectDetails();
+                                        goToProjectDetails(position);
                                     }
                                 });
                             }
@@ -153,13 +163,14 @@ public class ViewProjects extends AppCompatActivity {
                 }
             });
 
-            queue.add(jsonObjectRequest);
+            queue.add(request);
 
             return null;
         }
 
         protected void onPostExecute(String s) {
             super.onPreExecute();
+            Toast.makeText(ViewProjects.this, "Projects fetched.", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         }
     }

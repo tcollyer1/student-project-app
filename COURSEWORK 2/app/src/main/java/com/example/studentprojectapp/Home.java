@@ -46,7 +46,7 @@ public class Home extends AppCompatActivity {
         viewProjectsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openViewProjects();
+                openViewProjects(studentID);
             }
         });
 
@@ -68,7 +68,7 @@ public class Home extends AppCompatActivity {
 
     private String getStudentID() {
         Intent intent = getIntent();
-        String studentID = intent.getStringExtra("StudentID");
+        String studentID = intent.getStringExtra("studentID");
 
         return studentID;
     }
@@ -79,9 +79,10 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void openViewProjects() {
+    private void openViewProjects(String studentID) {
         Context context = getApplicationContext();
         Intent intent = new Intent(context, ViewProjects.class);
+        intent.putExtra("studentID", studentID);
         startActivity(intent);
     }
 }

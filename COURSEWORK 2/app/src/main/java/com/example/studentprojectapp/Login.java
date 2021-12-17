@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity {
     private void openHomeScreen(String studentID) {
         Context context = getApplicationContext();
         Intent intent = new Intent(context, Home.class);
-        intent.putExtra("StudentID", studentID);
+        intent.putExtra("studentID", studentID);
 
         startActivity(intent);
     }

@@ -26,6 +26,7 @@ public class UpdateProject extends AppCompatActivity {
     private StudentProject getProjectInfo() {
         Intent intent = getIntent();
 
+        int projectID = Integer.parseInt(intent.getStringExtra("projectID"));
         int studentID = Integer.parseInt(intent.getStringExtra("studentID")); // this is iffy
         String title = intent.getStringExtra("title");
         String description = intent.getStringExtra("description");
@@ -33,7 +34,7 @@ public class UpdateProject extends AppCompatActivity {
         String first_name = intent.getStringExtra("first_name");
         String second_name = intent.getStringExtra("second_name");
 
-        return new StudentProject(studentID, title, description, year, first_name, second_name);
+        return new StudentProject(projectID, studentID, title, description, year, first_name, second_name);
     }
 
     private void setTextFields() {
