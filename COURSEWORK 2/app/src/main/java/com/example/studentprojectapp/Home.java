@@ -1,13 +1,17 @@
 package com.example.studentprojectapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Home extends AppCompatActivity {
 
@@ -23,6 +27,13 @@ public class Home extends AppCompatActivity {
         Button logOutBtn = findViewById(R.id.btn_logOut);
         Button viewProjectsBtn = findViewById(R.id.btn_viewProjects);
         TextView welcomeTxt = findViewById(R.id.lbl_welcome_home);
+        Switch notifToggle = findViewById(R.id.swt_notificationtoggle);
+
+        //Boolean switchState = notifToggle.isChecked();
+
+        // Set switch to on by default
+        notifToggle.setChecked(true);
+        notifToggle.setText("Notifications ON");
 
         // Set welcome text
         welcomeTxt.setText(newWelcomeTxt);
@@ -38,6 +49,20 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openViewProjects();
+            }
+        });
+
+        notifToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    notifToggle.setText("Notifications ON");
+                    Toast.makeText(Home.this, "Notifications turned on.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    notifToggle.setText("Notifications OFF");
+                    Toast.makeText(Home.this, "Notifications turned off.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
