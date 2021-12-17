@@ -94,6 +94,7 @@
             android:layout_marginTop="32dp"
             android:text="Student ID"
             android:textColor="#000000"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lbl_updateProject_title" />
@@ -105,6 +106,7 @@
             android:layout_marginTop="20dp"
             android:text="Title"
             android:textColor="#000000"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_id" />
@@ -116,6 +118,7 @@
             android:layout_marginTop="20dp"
             android:text="Description"
             android:textColor="#000000"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_title" />
@@ -127,6 +130,7 @@
             android:layout_marginTop="20dp"
             android:text="Year"
             android:textColor="#000000"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_description" />
@@ -138,6 +142,7 @@
             android:layout_marginTop="20dp"
             android:text="First name"
             android:textColor="#000000"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_year" />
@@ -149,6 +154,7 @@
             android:layout_marginTop="20dp"
             android:text="Second name"
             android:textColor="#000000"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_fname" />
