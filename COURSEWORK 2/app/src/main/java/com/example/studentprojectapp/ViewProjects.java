@@ -8,7 +8,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
@@ -23,6 +26,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class ViewProjects extends AppCompatActivity {
 //    private int studentID;
 //    private String title;
@@ -30,6 +35,7 @@ public class ViewProjects extends AppCompatActivity {
 //    private int year;
 //    private String first_name;
 //    private String second_name;
+    private ArrayList<String> projectsList = new ArrayList<>();
 
     private StudentProject sp;
 
@@ -41,14 +47,16 @@ public class ViewProjects extends AppCompatActivity {
         MyAsyncTasks myAsyncTasks = new MyAsyncTasks();
         myAsyncTasks.execute();
 
-        Button detailsBtn = findViewById(R.id.btn_details);
+        //Button detailsBtn = findViewById(R.id.btn_details);
 
-        detailsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToProjectDetails();
-            }
-        });
+
+
+//        detailsBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                goToProjectDetails();
+//            }
+//        });
     }
 
     private void goToProjectDetails() {
@@ -72,6 +80,7 @@ public class ViewProjects extends AppCompatActivity {
 
     public class MyAsyncTasks extends AsyncTask<String, String, String> {
         ProgressDialog progressDialog;
+        String textViewStr;
 
         protected void onPreExecute() {
             super.onPreExecute();
@@ -84,7 +93,7 @@ public class ViewProjects extends AppCompatActivity {
         protected String doInBackground(String... params) {
             RequestQueue queue = Volley.newRequestQueue(ViewProjects.this);
             String apiURL = "http://web.socem.plymouth.ac.uk/COMP2000/api/students/2";
-            TextView textView = findViewById(R.id.projectDisplay);
+            //TextView textView = findViewById(R.id.projectDisplay);
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, apiURL, null,
                     new Response.Listener<JSONObject>() {
@@ -111,19 +120,36 @@ public class ViewProjects extends AppCompatActivity {
                                 sp = new StudentProject(studentID, title, description, year, first_name, second_name);
 
                                 //String textViewStr = "Student ID: " + studID + ", Title: " + title + ", Description: " + description + ", Year: " + year + ", Full name: " + fName + " " + lName;
-                                String textViewStr = title + " (" + year + ")";
+                                textViewStr = title + " (" + year + ")";
 
-                                textView.setText(textViewStr);
+                                //textView.setText(textViewStr);
+
+                                // This is the part with the ListView
+                                ListView listView = findViewById(R.id.listview);
+
+                                projectsList.add(textViewStr);
+                                projectsList.add("test proj 1 (2021)");
+                                projectsList.add("test proj 2 (2018)");
+
+                                ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, projectsList);
+
+                                listView.setAdapter(adapter);
+
+                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    // position = pos of element we're clicking
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        goToProjectDetails();
+                                    }
+                                });
                             }
                             catch (Exception ex) {
                                 Toast.makeText(ViewProjects.this, "Something went wrong...", Toast.LENGTH_SHORT).show();
-                                textView.setText(ex.toString());
                             }
                         }
                     }, new Response.ErrorListener() {
                 public void onErrorResponse(VolleyError error) {
                     Toast.makeText(ViewProjects.this, "No projects yet...", Toast.LENGTH_SHORT).show();
-                    textView.setText("No projects to show!");
                 }
             });
 
