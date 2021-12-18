@@ -33,6 +33,7 @@ public class ViewProjects extends AppCompatActivity {
 
     private StudentProject sp;
     private int currentStudentID;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +44,14 @@ public class ViewProjects extends AppCompatActivity {
         currentStudentID = getStudentID();
 
         try {
-            MyAsyncTasks myAsyncTasks = new MyAsyncTasks();
-            myAsyncTasks.execute();
+            GetProjects getProjects = new GetProjects();
+            getProjects.execute();
         }
         catch (Exception ex) {
             Toast.makeText(ViewProjects.this, ex.toString(), Toast.LENGTH_SHORT).show();
         }
+
+        progressDialog.dismiss();
     }
 
     @Override
@@ -90,8 +93,8 @@ public class ViewProjects extends AppCompatActivity {
         return studentID;
     }
 
-    public class MyAsyncTasks extends AsyncTask<String, String, String> {
-        ProgressDialog progressDialog;
+    public class GetProjects extends AsyncTask<String, String, String> {
+//        ProgressDialog progressDialog;
         String textViewStr;
 
         @Override
@@ -149,6 +152,7 @@ public class ViewProjects extends AppCompatActivity {
                                         goToProjectDetails(position);
                                     }
                                 });
+
                             }
                             catch (Exception ex) {
                                 Toast.makeText(ViewProjects.this, "Something went wrong...", Toast.LENGTH_SHORT).show();
@@ -169,7 +173,7 @@ public class ViewProjects extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPreExecute();
 
-            progressDialog.dismiss();
+            //progressDialog.dismiss();
         }
     }
 }
