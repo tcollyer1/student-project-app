@@ -13,17 +13,21 @@
         android:theme="@style/Theme.StudentProjectApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".AddProject"
+            android:exported="false"
+            android:parentActivityName=".Home"/>
+        <activity
             android:name=".ProjectDetails"
-            android:parentActivityName=".Home"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".Home" />
         <activity
             android:name=".UpdateProject"
-            android:parentActivityName=".ProjectDetails"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ProjectDetails" />
         <activity
             android:name=".ViewProjects"
-            android:parentActivityName=".Home"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".Home" />
         <activity
             android:name=".Home"
             android:exported="false" />

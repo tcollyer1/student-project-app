@@ -26,6 +26,8 @@ public class Home extends AppCompatActivity {
 
         Button logOutBtn = findViewById(R.id.btn_logOut);
         Button viewProjectsBtn = findViewById(R.id.btn_viewProjects);
+        Button addProjectBtn = findViewById(R.id.btn_addProject);
+
         TextView welcomeTxt = findViewById(R.id.lbl_welcome_home);
         Switch notifToggle = findViewById(R.id.swt_notificationtoggle);
 
@@ -47,6 +49,13 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openViewProjects(studentID);
+            }
+        });
+
+        addProjectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openAddProject(studentID);
             }
         });
 
@@ -82,6 +91,13 @@ public class Home extends AppCompatActivity {
     private void openViewProjects(String studentID) {
         Context context = getApplicationContext();
         Intent intent = new Intent(context, ViewProjects.class);
+        intent.putExtra("studentID", studentID);
+        startActivity(intent);
+    }
+
+    private void openAddProject(String studentID) {
+        Context context = getApplicationContext();
+        Intent intent = new Intent(context, AddProject.class);
         intent.putExtra("studentID", studentID);
         startActivity(intent);
     }

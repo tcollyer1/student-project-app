@@ -173,7 +173,7 @@ public class ViewProjects extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPreExecute();
 
-            //progressDialog.dismiss();
+            progressDialog.dismiss();
         }
     }
 }
