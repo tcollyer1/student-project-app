@@ -93,9 +93,14 @@ public class ProjectDetails extends AppCompatActivity {
         String base64 = sp.getPhoto();
 
         if (base64 != "null") {
-            byte[] bytes = Base64.getDecoder().decode(base64);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-            imgView.setImageBitmap(bitmap);
+            try {
+                byte[] bytes = Base64.getDecoder().decode(base64);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                imgView.setImageBitmap(bitmap);
+            } catch (Exception ex) {
+                Toast.makeText(getApplicationContext(), ex.toString(), Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 

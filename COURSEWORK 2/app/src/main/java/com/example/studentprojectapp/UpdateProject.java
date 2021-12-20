@@ -125,9 +125,9 @@ public class UpdateProject extends AppCompatActivity {
         EditText projectDetails[] = getTextFieldData().clone();
 
         try {
-            updatedSP = new StudentProject(sp.getProjectID(), Integer.parseInt(projectDetails[0].getText().toString()), projectDetails[1].getText().toString(), projectDetails[2].getText().toString(), Integer.parseInt(projectDetails[3].getText().toString()), projectDetails[4].getText().toString(), projectDetails[5].getText().toString(), projectDetails[6].getText().toString());
+            updatedSP = new StudentProject(sp.getProjectID(), Integer.parseInt(projectDetails[0].getText().toString()), projectDetails[1].getText().toString(), projectDetails[2].getText().toString(), Integer.parseInt(projectDetails[3].getText().toString()), projectDetails[4].getText().toString(), projectDetails[5].getText().toString(), "null");
         } catch (Exception ex) {
-
+            Toast.makeText(UpdateProject.this, ex.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
