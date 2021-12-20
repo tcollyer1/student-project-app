@@ -1,5 +1,6 @@
 package com.example.studentprojectapp;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,10 +8,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,9 +28,14 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.util.Base64;
+import java.util.Base64.*;
+
 public class ProjectDetails extends AppCompatActivity {
     private StudentProject sp;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +45,8 @@ public class ProjectDetails extends AppCompatActivity {
         sp = getProjectInfo();
 
         setEditTexts();
+
+        setPhoto();
 
         Button updateBtn = findViewById(R.id.btn_update);
         Button deleteBtn = findViewById(R.id.btn_delete);
@@ -75,6 +87,18 @@ public class ProjectDetails extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void setPhoto() {
+        ImageView imgView = findViewById(R.id.img_projphoto);
+        String base64 = sp.getPhoto();
+
+        if (base64 != "null") {
+            byte[] bytes = Base64.getDecoder().decode(base64);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            imgView.setImageBitmap(bitmap);
+        }
+    }
+
     private void setEditTexts() {
         TextView idTxt = findViewById(R.id.lbl_id_value);
         TextView titleTxt = findViewById(R.id.lbl_title_value);
@@ -104,8 +128,9 @@ public class ProjectDetails extends AppCompatActivity {
         int year = Integer.parseInt(intent.getStringExtra("year")); //  this is iffy
         String first_name = intent.getStringExtra("first_name");
         String second_name = intent.getStringExtra("second_name");
+        String photo = intent.getStringExtra("photo");
 
-        return new StudentProject(projectID, studentID, title, description, year, first_name, second_name);
+        return new StudentProject(projectID, studentID, title, description, year, first_name, second_name, photo);
     }
 
     private void goToUpdateProject() {
@@ -119,6 +144,7 @@ public class ProjectDetails extends AppCompatActivity {
         intent.putExtra("year", Integer.toString(sp.getYear()));
         intent.putExtra("first_name", sp.getFirst_name());
         intent.putExtra("second_name", sp.getSecond_name());
+        intent.putExtra("photo", sp.getPhoto());
 
         startActivity(intent);
     }

@@ -8,8 +8,9 @@ public class StudentProject {
     private int year;
     private String first_name;
     private String second_name;
+    private String photo;
 
-    public StudentProject(int ProjectID, int StudentID, String Title, String Description, int Year, String First_Name, String Second_Name) {
+    public StudentProject(int ProjectID, int StudentID, String Title, String Description, int Year, String First_Name, String Second_Name, String Photo) {
         projectID = ProjectID;
         studentID = StudentID;
         title = Title;
@@ -17,6 +18,7 @@ public class StudentProject {
         year = Year;
         first_name = First_Name;
         second_name = Second_Name;
+        photo = Photo;
     }
 
     public int getProjectID() {
@@ -45,5 +47,9 @@ public class StudentProject {
 
     public String getSecond_name() {
         return second_name;
+    }
+
+    public String getPhoto() {
+        return photo;
     }
 }

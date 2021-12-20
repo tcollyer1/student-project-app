@@ -84,8 +84,9 @@ public class UpdateProject extends AppCompatActivity {
         int year = Integer.parseInt(intent.getStringExtra("year")); //  this is iffy
         String first_name = intent.getStringExtra("first_name");
         String second_name = intent.getStringExtra("second_name");
+        String photo = intent.getStringExtra("photo");
 
-        return new StudentProject(projectID, studentID, title, description, year, first_name, second_name);
+        return new StudentProject(projectID, studentID, title, description, year, first_name, second_name, photo);
     }
 
     private void setTextFields() {
@@ -124,7 +125,7 @@ public class UpdateProject extends AppCompatActivity {
         EditText projectDetails[] = getTextFieldData().clone();
 
         try {
-            updatedSP = new StudentProject(sp.getProjectID(), Integer.parseInt(projectDetails[0].getText().toString()), projectDetails[1].getText().toString(), projectDetails[2].getText().toString(), Integer.parseInt(projectDetails[3].getText().toString()), projectDetails[4].getText().toString(), projectDetails[5].getText().toString());
+            updatedSP = new StudentProject(sp.getProjectID(), Integer.parseInt(projectDetails[0].getText().toString()), projectDetails[1].getText().toString(), projectDetails[2].getText().toString(), Integer.parseInt(projectDetails[3].getText().toString()), projectDetails[4].getText().toString(), projectDetails[5].getText().toString(), projectDetails[6].getText().toString());
         } catch (Exception ex) {
 
         }

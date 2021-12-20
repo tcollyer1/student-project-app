@@ -82,6 +82,7 @@ public class ViewProjects extends AppCompatActivity {
         intent.putExtra("year", Integer.toString(current.getYear()));
         intent.putExtra("first_name", current.getFirst_name());
         intent.putExtra("second_name", current.getSecond_name());
+        intent.putExtra("photo", current.getPhoto());
 
         startActivity(intent);
     }
@@ -128,8 +129,9 @@ public class ViewProjects extends AppCompatActivity {
                                         int year = project.getInt("year");
                                         String first_name = project.getString("first_Name");
                                         String second_name = project.getString("second_Name");
+                                        String photo = project.getString("photo");
 
-                                        sp = new StudentProject(projectID, studentID, title, description, year, first_name, second_name);
+                                        sp = new StudentProject(projectID, studentID, title, description, year, first_name, second_name, photo);
 
                                         textViewStr = title + " (" + year + ")";
 

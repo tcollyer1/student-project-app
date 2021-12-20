@@ -82,7 +82,7 @@ public class AddProject extends AppCompatActivity {
         EditText projectDetails[] = getTextFieldData().clone();
 
         try {
-            newSP = new StudentProject(0, studentID, projectDetails[1].getText().toString(), projectDetails[2].getText().toString(), Integer.parseInt(projectDetails[3].getText().toString()), projectDetails[4].getText().toString(), projectDetails[5].getText().toString());
+            newSP = new StudentProject(0, studentID, projectDetails[1].getText().toString(), projectDetails[2].getText().toString(), Integer.parseInt(projectDetails[3].getText().toString()), projectDetails[4].getText().toString(), projectDetails[5].getText().toString(), "null");
         } catch (Exception ex) {
 
         }
