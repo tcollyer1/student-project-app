@@ -14,6 +14,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
+
 public class ProjectDetails extends AppCompatActivity {
     private StudentProject sp;
 
@@ -130,7 +139,7 @@ public class ProjectDetails extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
-                openViewProjects(Integer.toString(sp.getStudentID()));
+                deleteProject();
         }
         });
 
@@ -142,5 +151,29 @@ public class ProjectDetails extends AppCompatActivity {
         });
 
         dialog.create().show();
+    }
+
+    private void deleteProject() {
+        RequestQueue queue = Volley.newRequestQueue(ProjectDetails.this);
+
+        int projectID = sp.getProjectID();
+        String apiURL = "http://web.socem.plymouth.ac.uk/COMP2000/api/students/" + projectID;
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, apiURL, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                    }
+                }, new Response.ErrorListener() {
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ProjectDetails.this, "Project deleted.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        queue.add(request);
+
+        openViewProjects(Integer.toString(sp.getStudentID()));
+
     }
 }
