@@ -33,7 +33,7 @@ public class ViewProjects extends AppCompatActivity {
 
     private StudentProject sp;
     private int currentStudentID;
-    private ProgressDialog progressDialog;
+    //private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class ViewProjects extends AppCompatActivity {
             Toast.makeText(ViewProjects.this, ex.toString(), Toast.LENGTH_SHORT).show();
         }
 
-        progressDialog.dismiss();
+        //progressDialog.dismiss();
     }
 
     @Override
@@ -94,8 +94,8 @@ public class ViewProjects extends AppCompatActivity {
     }
 
     public class GetProjects extends AsyncTask<String, String, String> {
-//        ProgressDialog progressDialog;
         String textViewStr;
+        ProgressDialog progressDialog;
 
         @Override
         protected void onPreExecute() {
@@ -166,14 +166,15 @@ public class ViewProjects extends AppCompatActivity {
 
             queue.add(request);
 
-            return null;
+            return "done";
         }
 
         @Override
         protected void onPostExecute(String s) {
-            super.onPreExecute();
-
-            progressDialog.dismiss();
+            super.onPostExecute(s);
+            if (s == "done") {
+                progressDialog.dismiss();
+            }
         }
     }
 }
