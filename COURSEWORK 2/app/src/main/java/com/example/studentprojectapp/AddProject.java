@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,6 +28,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 public class AddProject extends AppCompatActivity {
     private int studentID;
@@ -42,6 +44,7 @@ public class AddProject extends AppCompatActivity {
 
         studentID = getStudentID();
         notifs = getNotifPref();
+        setTxtFields();
 
         Button submitBtn = findViewById(R.id.btn_submitnewproject);
 
@@ -76,6 +79,11 @@ public class AddProject extends AppCompatActivity {
         return studentID;
     }
 
+    private void setTxtFields() {
+        TextView idTxt = findViewById(R.id.info_new_id);
+        idTxt.setText(Integer.toString(studentID));
+    }
+
     private boolean getNotifPref() {
         Intent intent = getIntent();
         boolean pref = Boolean.parseBoolean(intent.getStringExtra("notifsPref"));
@@ -84,14 +92,16 @@ public class AddProject extends AppCompatActivity {
     }
 
     private EditText[] getTextFieldData() {
-        EditText idTxt = findViewById(R.id.txt_new_id);
+//        EditText idTxt = findViewById(R.id.txt_new_id);
+        //TextView idTxt = findViewById(R.id.info_new_id);
         EditText titleTxt = findViewById(R.id.txt_new_title);
         EditText descriptionTxt = findViewById(R.id.txt_new_description);
         EditText yearTxt = findViewById(R.id.txt_new_year);
         EditText fnameTxt = findViewById(R.id.txt_new_fname);
         EditText lnameTxt = findViewById(R.id.txt_new_lname);
 
-        EditText arr[] = {idTxt, titleTxt, descriptionTxt, yearTxt, fnameTxt, lnameTxt};
+//        EditText arr[] = {idTxt, titleTxt, descriptionTxt, yearTxt, fnameTxt, lnameTxt};
+        EditText arr[] = {titleTxt, descriptionTxt, yearTxt, fnameTxt, lnameTxt};
 
         return arr;
     }

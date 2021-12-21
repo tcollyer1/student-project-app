@@ -38,16 +38,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lbl_addProject_title" />
 
-        <EditText
-            android:id="@+id/txt_new_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lbl_new_id" />
-
         <TextView
             android:id="@+id/lbl_new_title"
             android:layout_width="wrap_content"
@@ -58,7 +48,7 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_new_id" />
+            app:layout_constraintTop_toBottomOf="@+id/info_new_id" />
 
         <TextView
             android:id="@+id/lbl_new_description"
@@ -167,6 +157,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_new_lname" />
+
+        <TextView
+            android:id="@+id/info_new_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lbl_new_id" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
