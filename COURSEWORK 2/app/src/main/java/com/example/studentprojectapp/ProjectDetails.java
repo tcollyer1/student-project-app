@@ -28,9 +28,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.util.Base64;
-import java.util.Base64.*;
 
 public class ProjectDetails extends AppCompatActivity {
     private StudentProject sp;
@@ -154,10 +152,11 @@ public class ProjectDetails extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void openViewProjects(String studentID) {
+    private void openHome(String studentID) {
         Context context = getApplicationContext();
-        Intent intent = new Intent(context, ViewProjects.class);
+        Intent intent = new Intent(context, Home.class);
         intent.putExtra("studentID", studentID);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear stack so user doesn't backtrack into menus for an already-deleted project
         startActivity(intent);
     }
 
@@ -204,7 +203,7 @@ public class ProjectDetails extends AppCompatActivity {
 
         queue.add(request);
 
-        openViewProjects(Integer.toString(sp.getStudentID()));
+        openHome(Integer.toString(sp.getStudentID()));
 
     }
 }
