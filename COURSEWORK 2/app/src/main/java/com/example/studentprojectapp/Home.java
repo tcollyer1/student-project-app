@@ -36,7 +36,13 @@ public class Home extends AppCompatActivity {
         notifs = getNotifsPref();
 
         notifToggle.setChecked(notifs);
-        notifToggle.setText("Notifications ON");
+
+        if (notifs) {
+            notifToggle.setText("Notifications ON");
+        } else {
+            notifToggle.setText("Notifications OFF");
+        }
+
 
         // Set welcome text
         welcomeTxt.setText(newWelcomeTxt);
@@ -66,10 +72,12 @@ public class Home extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    notifToggle.setText("Notifications ON");
                     setNotifsPref(true);
                     Toast.makeText(Home.this, "Notifications turned on.", Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    notifToggle.setText("Notifications OFF");
                     setNotifsPref(false);
                     Toast.makeText(Home.this, "Notifications turned off.", Toast.LENGTH_SHORT).show();
                 }
