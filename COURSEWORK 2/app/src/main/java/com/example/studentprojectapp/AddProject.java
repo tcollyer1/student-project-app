@@ -30,6 +30,7 @@ import org.json.JSONObject;
 
 public class AddProject extends AppCompatActivity {
     private int studentID;
+    private boolean notifs;
     private StudentProject newSP;
 
     @Override
@@ -40,6 +41,7 @@ public class AddProject extends AppCompatActivity {
         createNotificationChannel();
 
         studentID = getStudentID();
+        notifs = getNotifPref();
 
         Button submitBtn = findViewById(R.id.btn_submitnewproject);
 
@@ -58,6 +60,7 @@ public class AddProject extends AppCompatActivity {
 
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("studentID", Integer.toString(studentID));
+                resultIntent.putExtra("notifsPref", Boolean.toString(notifs));
                 setResult(Activity.RESULT_OK, resultIntent);
                 this.finish();
 
@@ -71,6 +74,13 @@ public class AddProject extends AppCompatActivity {
         int studentID = Integer.parseInt(intent.getStringExtra("studentID"));
 
         return studentID;
+    }
+
+    private boolean getNotifPref() {
+        Intent intent = getIntent();
+        boolean pref = Boolean.parseBoolean(intent.getStringExtra("notifsPref"));
+
+        return pref;
     }
 
     private EditText[] getTextFieldData() {
@@ -106,6 +116,7 @@ public class AddProject extends AppCompatActivity {
 
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("studentID", studentID);
+        intent.putExtra("notifsPref", Boolean.toString(notifs));
 
         startActivity(intent);
     }
@@ -146,9 +157,11 @@ public class AddProject extends AppCompatActivity {
 
         openHome(Integer.toString(studentID));
 
-        Intent goToProjects = new Intent(getApplicationContext(), ViewProjects.class); // intent for going straight to projects on tap of notification
-        goToProjects.putExtra("studentID", Integer.toString(studentID));
-        showNotification(goToProjects);
+        if (notifs) {
+            Intent goToProjects = new Intent(getApplicationContext(), ViewProjects.class); // intent for going straight to projects on tap of notification
+            goToProjects.putExtra("studentID", Integer.toString(studentID));
+            showNotification(goToProjects);
+        }
     }
 
     private void showNotification(Intent intent) {

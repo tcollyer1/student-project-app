@@ -37,6 +37,7 @@ import java.util.Base64;
 
 public class ProjectDetails extends AppCompatActivity {
     private StudentProject sp;
+    private boolean notif;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -47,6 +48,7 @@ public class ProjectDetails extends AppCompatActivity {
         createNotificationChannel();
 
         sp = getProjectInfo();
+        notif = getNotifPref();
 
         setEditTexts();
 
@@ -78,6 +80,7 @@ public class ProjectDetails extends AppCompatActivity {
                 Intent resultIntent = new Intent();
                 //resultIntent.putExtra("projectID", Integer.toString(sp.getProjectID()));
                 resultIntent.putExtra("studentID", Integer.toString(sp.getStudentID()));
+                resultIntent.putExtra("notifsPref", Boolean.toString(notif));
                 //resultIntent.putExtra("title", sp.getTitle());
                 //resultIntent.putExtra("description", sp.getDescription());
                 //resultIntent.putExtra("year", Integer.toString(sp.getYear()));
@@ -106,6 +109,13 @@ public class ProjectDetails extends AppCompatActivity {
             }
 
         }
+    }
+
+    private boolean getNotifPref() {
+        Intent intent = getIntent();
+        boolean pref = Boolean.parseBoolean(intent.getStringExtra("notifsPref"));
+
+        return pref;
     }
 
     private void setEditTexts() {
@@ -155,6 +165,8 @@ public class ProjectDetails extends AppCompatActivity {
         intent.putExtra("second_name", sp.getSecond_name());
         intent.putExtra("photo", sp.getPhoto());
 
+        intent.putExtra("notifsPref", Boolean.toString(notif));
+
         startActivity(intent);
     }
 
@@ -162,6 +174,8 @@ public class ProjectDetails extends AppCompatActivity {
         Context context = getApplicationContext();
         Intent intent = new Intent(context, Home.class);
         intent.putExtra("studentID", studentID);
+        intent.putExtra("notifsPref", Boolean.toString(notif));
+
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear stack so user doesn't backtrack into menus for an already-deleted project
         startActivity(intent);
     }
@@ -211,9 +225,11 @@ public class ProjectDetails extends AppCompatActivity {
 
         openHome(Integer.toString(sp.getStudentID()));
 
-        Intent goToProjects = new Intent(getApplicationContext(), ViewProjects.class); // intent for going straight to projects on tap of notification
-        goToProjects.putExtra("studentID", Integer.toString(sp.getStudentID()));
-        showNotification(goToProjects);
+        if (notif) {
+            Intent goToProjects = new Intent(getApplicationContext(), ViewProjects.class); // intent for going straight to projects on tap of notification
+            goToProjects.putExtra("studentID", Integer.toString(sp.getStudentID()));
+            showNotification(goToProjects);
+        }
     }
 
     private void createNotificationChannel() {

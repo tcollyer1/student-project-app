@@ -36,6 +36,7 @@ public class ViewProjects extends AppCompatActivity {
 
     private StudentProject sp;
     private int currentStudentID;
+    private boolean notifs;
     //private ProgressDialog progressDialog;
 
     @Override
@@ -45,6 +46,7 @@ public class ViewProjects extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         currentStudentID = getStudentID();
+        notifs = getNotifPref();
 
         try {
             GetProjects getProjects = new GetProjects();
@@ -64,12 +66,20 @@ public class ViewProjects extends AppCompatActivity {
 
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("studentID", Integer.toString(currentStudentID));
+                resultIntent.putExtra("notifsPref", Boolean.toString(notifs));
                 setResult(Activity.RESULT_OK, resultIntent);
                 this.finish();
 
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean getNotifPref() {
+        Intent intent = getIntent();
+        boolean pref = Boolean.parseBoolean(intent.getStringExtra("notifsPref"));
+
+        return pref;
     }
 
     private void goToProjectDetails(int index) {
@@ -86,6 +96,7 @@ public class ViewProjects extends AppCompatActivity {
         intent.putExtra("first_name", current.getFirst_name());
         intent.putExtra("second_name", current.getSecond_name());
         intent.putExtra("photo", current.getPhoto());
+        intent.putExtra("notifsPref", Boolean.toString(notifs));
 
         startActivity(intent);
     }
