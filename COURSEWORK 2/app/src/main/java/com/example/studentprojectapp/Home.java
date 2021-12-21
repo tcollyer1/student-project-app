@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Home extends AppCompatActivity {
+    private boolean notifs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +32,10 @@ public class Home extends AppCompatActivity {
         TextView welcomeTxt = findViewById(R.id.lbl_welcome_home);
         Switch notifToggle = findViewById(R.id.swt_notificationtoggle);
 
-        // Set switch to on by default
-        notifToggle.setChecked(true);
+        // Set switch to user's choice
+        notifs = getNotifsPref();
+
+        notifToggle.setChecked(notifs);
         notifToggle.setText("Notifications ON");
 
         // Set welcome text
@@ -64,10 +67,12 @@ public class Home extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     notifToggle.setText("Notifications ON");
+                    setNotifsPref(true);
                     Toast.makeText(Home.this, "Notifications turned on.", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     notifToggle.setText("Notifications OFF");
+                    setNotifsPref(false);
                     Toast.makeText(Home.this, "Notifications turned off.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -82,6 +87,20 @@ public class Home extends AppCompatActivity {
         return studentID;
     }
 
+    private void setNotifsPref(boolean pref) {
+        notifs = pref;
+    }
+
+    private boolean getNotifsPref() {
+        Intent intent = getIntent();
+        String result = intent.getStringExtra("notifsPref");
+        if (result != null) {
+            return Boolean.parseBoolean(result);
+        }
+
+        return true; // on by default
+    }
+
     private void logOut() {
         Context context = getApplicationContext();
         Intent intent = new Intent(context, Login.class);
@@ -92,6 +111,7 @@ public class Home extends AppCompatActivity {
         Context context = getApplicationContext();
         Intent intent = new Intent(context, ViewProjects.class);
         intent.putExtra("studentID", studentID);
+        intent.putExtra("notifsPref", Boolean.toString(notifs));
         startActivity(intent);
     }
 
@@ -99,6 +119,7 @@ public class Home extends AppCompatActivity {
         Context context = getApplicationContext();
         Intent intent = new Intent(context, AddProject.class);
         intent.putExtra("studentID", studentID);
+        intent.putExtra("notifsPref", Boolean.toString(notifs));
         startActivity(intent);
     }
 }
