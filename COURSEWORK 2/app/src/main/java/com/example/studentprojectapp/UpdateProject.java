@@ -12,28 +12,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.security.keystore.StrongBoxUnavailableException;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.snackbar.Snackbar;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class UpdateProject extends AppCompatActivity {
     private StudentProject sp;
@@ -116,12 +108,12 @@ public class UpdateProject extends AppCompatActivity {
         EditText fnameTxt = findViewById(R.id.txt_fname);
         EditText lnameTxt = findViewById(R.id.txt_lname);
 
-        EditText arr[] = {idTxt, titleTxt, descriptionTxt, yearTxt, fnameTxt, lnameTxt};
+        EditText[] arr = {idTxt, titleTxt, descriptionTxt, yearTxt, fnameTxt, lnameTxt};
 
         return arr;
     }
 
-    private void openViewProjects(String studentID) {
+    private void openHome(String studentID) {
         Context context = getApplicationContext();
         Intent intent = new Intent(context, Home.class);
         intent.putExtra("studentID", studentID);
@@ -131,7 +123,7 @@ public class UpdateProject extends AppCompatActivity {
     }
 
     private void getUpdatedValues() {
-        EditText projectDetails[] = getTextFieldData().clone();
+        EditText[] projectDetails = getTextFieldData().clone();
 
         try {
             updatedSP = new StudentProject(sp.getProjectID(), Integer.parseInt(projectDetails[0].getText().toString()), projectDetails[1].getText().toString(), projectDetails[2].getText().toString(), Integer.parseInt(projectDetails[3].getText().toString()), projectDetails[4].getText().toString(), projectDetails[5].getText().toString(), "null");
@@ -175,7 +167,7 @@ public class UpdateProject extends AppCompatActivity {
 
         queue.add(request);
 
-        openViewProjects(Integer.toString(sp.getStudentID()));
+        openHome(Integer.toString(sp.getStudentID()));
 
         Intent goToProjects = new Intent(getApplicationContext(), ViewProjects.class); // intent for going straight to projects on tap of notification
         goToProjects.putExtra("studentID", Integer.toString(sp.getStudentID()));

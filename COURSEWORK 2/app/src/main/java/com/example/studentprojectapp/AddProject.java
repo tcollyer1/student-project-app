@@ -99,12 +99,14 @@ public class AddProject extends AppCompatActivity {
     private void openHome(String studentID) {
         Context context = getApplicationContext();
         Intent intent = new Intent(context, Home.class);
-        Intent goToProjects = new Intent(context, ViewProjects.class); // intent for going straight to projects on tap of notification
 
+//        Intent goToProjects = new Intent(context, ViewProjects.class); // intent for going straight to projects on tap of notification
+//        goToProjects.putExtra("studentID", studentID);
+//        showNotification(goToProjects);
+
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("studentID", studentID);
-        goToProjects.putExtra("studentID", studentID);
 
-        showNotification(goToProjects);
         startActivity(intent);
     }
 
@@ -137,20 +139,23 @@ public class AddProject extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(AddProject.this, "Submitted!", Toast.LENGTH_SHORT).show();
-                //showNotification();
             }
         });
 
         queue.add(request);
 
         openHome(Integer.toString(studentID));
+
+        Intent goToProjects = new Intent(getApplicationContext(), ViewProjects.class); // intent for going straight to projects on tap of notification
+        goToProjects.putExtra("studentID", Integer.toString(studentID));
+        showNotification(goToProjects);
     }
 
     private void showNotification(Intent intent) {
 
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
