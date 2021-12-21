@@ -1,10 +1,17 @@
 package com.example.studentprojectapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +37,7 @@ public class AddProject extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_project);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        createNotificationChannel();
 
         studentID = getStudentID();
 
@@ -91,7 +99,12 @@ public class AddProject extends AppCompatActivity {
     private void openHome(String studentID) {
         Context context = getApplicationContext();
         Intent intent = new Intent(context, Home.class);
+        Intent goToProjects = new Intent(context, ViewProjects.class); // intent for going straight to projects on tap of notification
+
         intent.putExtra("studentID", studentID);
+        goToProjects.putExtra("studentID", studentID);
+
+        showNotification(goToProjects);
         startActivity(intent);
     }
 
@@ -100,7 +113,7 @@ public class AddProject extends AppCompatActivity {
 
         String apiURL = "http://web.socem.plymouth.ac.uk/COMP2000/api/students/";
 
-        getValuesToPost(); // sets updatedSP object to inputted values
+        getValuesToPost(); // sets newSP object to inputted values
 
         JSONObject postData = new JSONObject();
 
@@ -124,6 +137,7 @@ public class AddProject extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(AddProject.this, "Submitted!", Toast.LENGTH_SHORT).show();
+                //showNotification();
             }
         });
 
@@ -131,4 +145,41 @@ public class AddProject extends AppCompatActivity {
 
         openHome(Integer.toString(studentID));
     }
+
+    private void showNotification(Intent intent) {
+
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "0")
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle("Project added")
+                .setContentText("Your project " + newSP.getTitle() + " has been created. Tap here to view your projects.")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(contentIntent)
+                .setAutoCancel(true);
+
+        try {
+            notificationManager.notify(0, builder.build());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Toast.makeText(AddProject.this, ex.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Project Created";
+            String description = "Notification to display when a project has been successfully added.";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("0", name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
 }
