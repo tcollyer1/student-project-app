@@ -3,8 +3,13 @@ package com.example.studentprojectapp;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -39,6 +44,7 @@ public class ProjectDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_details);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        createNotificationChannel();
 
         sp = getProjectInfo();
 
@@ -205,5 +211,44 @@ public class ProjectDetails extends AppCompatActivity {
 
         openHome(Integer.toString(sp.getStudentID()));
 
+        Intent goToProjects = new Intent(getApplicationContext(), ViewProjects.class); // intent for going straight to projects on tap of notification
+        goToProjects.putExtra("studentID", Integer.toString(sp.getStudentID()));
+        showNotification(goToProjects);
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Project Created";
+            String description = "Notification to display when a project has been successfully added.";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("0", name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    private void showNotification(Intent intent) {
+
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "0")
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle("Project deleted")
+                .setContentText("You deleted " + sp.getTitle() + ". Tap here to view your projects.")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(contentIntent)
+                .setAutoCancel(true);
+
+        try {
+            notificationManager.notify(2, builder.build());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Toast.makeText(ProjectDetails.this, ex.toString(), Toast.LENGTH_SHORT).show();
+        }
     }
 }
