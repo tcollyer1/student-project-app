@@ -92,15 +92,11 @@ public class AddProject extends AppCompatActivity {
     }
 
     private EditText[] getTextFieldData() {
-//        EditText idTxt = findViewById(R.id.txt_new_id);
-        //TextView idTxt = findViewById(R.id.info_new_id);
         EditText titleTxt = findViewById(R.id.txt_new_title);
         EditText descriptionTxt = findViewById(R.id.txt_new_description);
         EditText yearTxt = findViewById(R.id.txt_new_year);
         EditText fnameTxt = findViewById(R.id.txt_new_fname);
-        EditText lnameTxt = findViewById(R.id.txt_new_lname);
-
-//        EditText arr[] = {idTxt, titleTxt, descriptionTxt, yearTxt, fnameTxt, lnameTxt};
+        EditText lnameTxt = findViewById(R.id.txt_new_lname);;
         EditText arr[] = {titleTxt, descriptionTxt, yearTxt, fnameTxt, lnameTxt};
 
         return arr;
@@ -110,7 +106,7 @@ public class AddProject extends AppCompatActivity {
         EditText projectDetails[] = getTextFieldData().clone();
 
         try {
-            newSP = new StudentProject(0, studentID, projectDetails[1].getText().toString(), projectDetails[2].getText().toString(), Integer.parseInt(projectDetails[3].getText().toString()), projectDetails[4].getText().toString(), projectDetails[5].getText().toString(), "null");
+            newSP = new StudentProject(0, studentID, projectDetails[0].getText().toString(), projectDetails[1].getText().toString(), Integer.parseInt(projectDetails[2].getText().toString()), projectDetails[3].getText().toString(), projectDetails[4].getText().toString(), "null");
         } catch (Exception ex) {
 
         }
@@ -141,14 +137,15 @@ public class AddProject extends AppCompatActivity {
         JSONObject postData = new JSONObject();
 
         try {
-            postData.put("StudentID", newSP.getStudentID());
+            postData.put("StudentID", studentID);
             postData.put("Title", newSP.getTitle());
             postData.put("Description", newSP.getDescription());
             postData.put("Year", newSP.getYear());
             postData.put("First_Name", newSP.getFirst_name());
             postData.put("Second_Name", newSP.getSecond_name());
         } catch (Exception ex) {
-            Toast.makeText(AddProject.this, ex.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddProject.this, "oh no", Toast.LENGTH_SHORT).show();
+            ex.printStackTrace();
         }
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, apiURL, postData,

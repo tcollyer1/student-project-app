@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -43,6 +44,7 @@ public class UpdateProject extends AppCompatActivity {
         notifs = getNotifPref();
 
         setTextFields();
+        setTextViews();
 
         Button updateBtn = findViewById(R.id.btn_submitUpdate);
 
@@ -103,25 +105,31 @@ public class UpdateProject extends AppCompatActivity {
         String strYear = Integer.toString(sp.getYear());
         String strID = Integer.toString(sp.getStudentID());
 
-        getTextFieldData()[0].setText(strID);
-        getTextFieldData()[1].setText(sp.getTitle());
-        getTextFieldData()[2].setText(sp.getDescription());
-        getTextFieldData()[3].setText(strYear);
-        getTextFieldData()[4].setText(sp.getFirst_name());
-        getTextFieldData()[5].setText(sp.getSecond_name());
+        getTextFieldData()[0].setText(sp.getTitle());
+        getTextFieldData()[1].setText(sp.getDescription());
+        getTextFieldData()[2].setText(strYear);
     }
 
     private EditText[] getTextFieldData() {
-        EditText idTxt = findViewById(R.id.txt_id);
         EditText titleTxt = findViewById(R.id.txt_title);
         EditText descriptionTxt = findViewById(R.id.txt_description);
         EditText yearTxt = findViewById(R.id.txt_year);
-        EditText fnameTxt = findViewById(R.id.txt_fname);
-        EditText lnameTxt = findViewById(R.id.txt_lname);
 
-        EditText[] arr = {idTxt, titleTxt, descriptionTxt, yearTxt, fnameTxt, lnameTxt};
+        EditText[] arr = {titleTxt, descriptionTxt, yearTxt};
 
         return arr;
+    }
+
+    private void setTextViews() {
+        String strID = Integer.toString(sp.getStudentID());
+
+        TextView idTxt = findViewById(R.id.info_id);
+        TextView fNameTxt = findViewById(R.id.info_fname);
+        TextView lNameTxt = findViewById(R.id.info_lname);
+
+        idTxt.setText(strID);
+        fNameTxt.setText(sp.getFirst_name());
+        lNameTxt.setText(sp.getSecond_name());
     }
 
     private void openHome(String studentID) {
@@ -138,7 +146,7 @@ public class UpdateProject extends AppCompatActivity {
         EditText[] projectDetails = getTextFieldData().clone();
 
         try {
-            updatedSP = new StudentProject(sp.getProjectID(), Integer.parseInt(projectDetails[0].getText().toString()), projectDetails[1].getText().toString(), projectDetails[2].getText().toString(), Integer.parseInt(projectDetails[3].getText().toString()), projectDetails[4].getText().toString(), projectDetails[5].getText().toString(), "null");
+            updatedSP = new StudentProject(sp.getProjectID(), sp.getStudentID(), projectDetails[0].getText().toString(), projectDetails[1].getText().toString(), Integer.parseInt(projectDetails[2].getText().toString()), sp.getFirst_name(), sp.getSecond_name(), "null");
         } catch (Exception ex) {
             Toast.makeText(UpdateProject.this, ex.toString(), Toast.LENGTH_SHORT).show();
         }
@@ -172,8 +180,8 @@ public class UpdateProject extends AppCompatActivity {
 
                     }
                 }, new Response.ErrorListener() {
-                    public void onErrorResponse(VolleyError error) {
-                    //Toast.makeText(UpdateProject.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    public void onErrorResponse(VolleyError error) { // Ends up in error section due to no JSON response coming back from API
+                    Toast.makeText(UpdateProject.this, "Project updated.", Toast.LENGTH_SHORT).show();
             }
         });
 
