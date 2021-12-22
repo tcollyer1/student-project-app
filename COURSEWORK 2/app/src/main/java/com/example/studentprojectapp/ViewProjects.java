@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,7 +39,7 @@ public class ViewProjects extends AppCompatActivity {
     private StudentProject sp;
     private int currentStudentID;
     private boolean notifs;
-    //private ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,24 +57,45 @@ public class ViewProjects extends AppCompatActivity {
         catch (Exception ex) {
             Toast.makeText(ViewProjects.this, ex.toString(), Toast.LENGTH_SHORT).show();
         }
-
-        //progressDialog.dismiss();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
             case android.R.id.home:
-
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("studentID", Integer.toString(currentStudentID));
-                resultIntent.putExtra("notifsPref", Boolean.toString(notifs));
-                setResult(Activity.RESULT_OK, resultIntent);
-                this.finish();
+                intent = new Intent(getApplicationContext(), Home.class);
+                intent.putExtra("studentID", Integer.toString(currentStudentID));
+                intent.putExtra("notifsPref", Boolean.toString(notifs));
+                startActivity(intent);
+//                Intent resultIntent = new Intent();
+//                resultIntent.putExtra("studentID", Integer.toString(currentStudentID));
+//                resultIntent.putExtra("notifsPref", Boolean.toString(notifs));
+//                setResult(Activity.RESULT_OK, resultIntent);
+//                this.finish();
 
                 return true;
+
+            case R.id.notification_toggle:
+                if (notifs) {
+                    notifs = false;
+                    Toast.makeText(this, "Notifications are now disabled.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    notifs = true;
+                    Toast.makeText(this, "Notifications are now enabled.", Toast.LENGTH_SHORT).show();
+                }
+                return true;
         }
-        return super.onOptionsItemSelected(item);
+        //return super.onOptionsItemSelected(item);
+        return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
     }
 
     private boolean getNotifPref() {
@@ -110,7 +133,7 @@ public class ViewProjects extends AppCompatActivity {
 
     public class GetProjects extends AsyncTask<String, String, String> {
         String textViewStr;
-        ProgressDialog progressDialog;
+        //ProgressDialog progressDialog;
 
         @Override
         protected void onPreExecute() {
@@ -188,9 +211,14 @@ public class ViewProjects extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            if (s == "done") {
-                progressDialog.dismiss();
-            }
+            progressDialog.dismiss();
+
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            cancel(true);
         }
     }
 }

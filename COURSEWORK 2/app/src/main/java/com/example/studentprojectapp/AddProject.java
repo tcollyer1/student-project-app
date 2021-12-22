@@ -13,6 +13,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -58,18 +60,41 @@ public class AddProject extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
             case android.R.id.home:
 
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("studentID", Integer.toString(studentID));
-                resultIntent.putExtra("notifsPref", Boolean.toString(notifs));
-                setResult(Activity.RESULT_OK, resultIntent);
-                this.finish();
+                intent = new Intent(getApplicationContext(), Home.class);
+                intent.putExtra("studentID", Integer.toString(studentID));
+                intent.putExtra("notifsPref", Boolean.toString(notifs));
+                startActivity(intent);
+//                Intent resultIntent = new Intent();
+//                resultIntent.putExtra("studentID", Integer.toString(studentID));
+//                resultIntent.putExtra("notifsPref", Boolean.toString(notifs));
+//                setResult(Activity.RESULT_OK, resultIntent);
+//                this.finish();
 
                 return true;
+
+            case R.id.notification_toggle:
+                if (notifs) {
+                    notifs = false;
+                    Toast.makeText(this, "Notifications are now disabled.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    notifs = true;
+                    Toast.makeText(this, "Notifications are now enabled.", Toast.LENGTH_SHORT).show();
+                }
+                return true;
         }
-        return super.onOptionsItemSelected(item);
+        return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
     }
 
     private int getStudentID() {
@@ -167,6 +192,7 @@ public class AddProject extends AppCompatActivity {
         if (notifs) {
             Intent goToProjects = new Intent(getApplicationContext(), ViewProjects.class); // intent for going straight to projects on tap of notification
             goToProjects.putExtra("studentID", Integer.toString(studentID));
+            goToProjects.putExtra("notifsPref", Boolean.toString(notifs));
             showNotification(goToProjects);
         }
     }

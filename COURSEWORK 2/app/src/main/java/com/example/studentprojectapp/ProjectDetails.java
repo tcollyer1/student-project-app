@@ -17,6 +17,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -74,24 +76,42 @@ public class ProjectDetails extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
             case android.R.id.home:
+                intent = new Intent(getApplicationContext(), ViewProjects.class);
+                intent.putExtra("studentID", Integer.toString(sp.getStudentID()));
+                intent.putExtra("notifsPref", Boolean.toString(notif));
+                startActivity(intent);
 
-                Intent resultIntent = new Intent();
-                //resultIntent.putExtra("projectID", Integer.toString(sp.getProjectID()));
-                resultIntent.putExtra("studentID", Integer.toString(sp.getStudentID()));
-                resultIntent.putExtra("notifsPref", Boolean.toString(notif));
-                //resultIntent.putExtra("title", sp.getTitle());
-                //resultIntent.putExtra("description", sp.getDescription());
-                //resultIntent.putExtra("year", Integer.toString(sp.getYear()));
-                //resultIntent.putExtra("first_name", sp.getFirst_name());
-                //resultIntent.putExtra("second_name", sp.getSecond_name());
-                setResult(Activity.RESULT_OK, resultIntent);
-                this.finish();
+//                Intent resultIntent = new Intent();
+//                resultIntent.putExtra("studentID", Integer.toString(sp.getStudentID()));
+//                resultIntent.putExtra("notifsPref", Boolean.toString(notif));
+//                setResult(Activity.RESULT_OK, resultIntent);
+//                this.finish();
 
                 return true;
+
+            case R.id.notification_toggle:
+                if (notif) {
+                    notif = false;
+                    Toast.makeText(this, "Notifications are now disabled.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    notif = true;
+                    Toast.makeText(this, "Notifications are now enabled.", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+
         }
-        return super.onOptionsItemSelected(item);
+        return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -228,6 +248,7 @@ public class ProjectDetails extends AppCompatActivity {
         if (notif) {
             Intent goToProjects = new Intent(getApplicationContext(), ViewProjects.class); // intent for going straight to projects on tap of notification
             goToProjects.putExtra("studentID", Integer.toString(sp.getStudentID()));
+            goToProjects.putExtra("notifsPref", Boolean.toString(notif));
             showNotification(goToProjects);
         }
     }

@@ -12,6 +12,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -58,25 +60,54 @@ public class UpdateProject extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
             case android.R.id.home:
 
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("projectID", Integer.toString(sp.getProjectID()));
-                resultIntent.putExtra("studentID", Integer.toString(sp.getStudentID()));
-                resultIntent.putExtra("title", sp.getTitle());
-                resultIntent.putExtra("description", sp.getDescription());
-                resultIntent.putExtra("year", Integer.toString(sp.getYear()));
-                resultIntent.putExtra("first_name", sp.getFirst_name());
-                resultIntent.putExtra("second_name", sp.getSecond_name());
-                resultIntent.putExtra("notifsPref", Boolean.toString(notifs));
+//                Intent resultIntent = new Intent();
+//                resultIntent.putExtra("projectID", Integer.toString(sp.getProjectID()));
+//                resultIntent.putExtra("studentID", Integer.toString(sp.getStudentID()));
+//                resultIntent.putExtra("title", sp.getTitle());
+//                resultIntent.putExtra("description", sp.getDescription());
+//                resultIntent.putExtra("year", Integer.toString(sp.getYear()));
+//                resultIntent.putExtra("first_name", sp.getFirst_name());
+//                resultIntent.putExtra("second_name", sp.getSecond_name());
+//                resultIntent.putExtra("notifsPref", Boolean.toString(notifs));
+//
+//                setResult(Activity.RESULT_OK, resultIntent);
+//                this.finish();
 
-                setResult(Activity.RESULT_OK, resultIntent);
-                this.finish();
+                intent = new Intent(getApplicationContext(), ProjectDetails.class);
+                intent.putExtra("projectID", Integer.toString(sp.getProjectID()));
+                intent.putExtra("studentID", Integer.toString(sp.getStudentID()));
+                intent.putExtra("title", sp.getTitle());
+                intent.putExtra("description", sp.getDescription());
+                intent.putExtra("year", Integer.toString(sp.getYear()));
+                intent.putExtra("first_name", sp.getFirst_name());
+                intent.putExtra("second_name", sp.getSecond_name());
+                intent.putExtra("notifsPref", Boolean.toString(notifs));
 
                 return true;
+
+            case R.id.notification_toggle:
+                if (notifs) {
+                    notifs = false;
+                    Toast.makeText(this, "Notifications are now disabled.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    notifs = true;
+                    Toast.makeText(this, "Notifications are now enabled.", Toast.LENGTH_SHORT).show();
+                }
+                return true;
         }
-        return super.onOptionsItemSelected(item);
+        return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
     }
 
     private boolean getNotifPref() {
@@ -192,6 +223,7 @@ public class UpdateProject extends AppCompatActivity {
         if (notifs) {
             Intent goToProjects = new Intent(getApplicationContext(), ViewProjects.class); // intent for going straight to projects on tap of notification
             goToProjects.putExtra("studentID", Integer.toString(sp.getStudentID()));
+            goToProjects.putExtra("notifsPref", Boolean.toString(notifs));
             showNotification(goToProjects);
         }
     }
