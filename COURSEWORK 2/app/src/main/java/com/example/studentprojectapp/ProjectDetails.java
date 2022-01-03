@@ -35,11 +35,13 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Base64;
 
 public class ProjectDetails extends AppCompatActivity {
     private StudentProject sp;
     private boolean notif;
+    private byte[] photo;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -84,12 +86,6 @@ public class ProjectDetails extends AppCompatActivity {
                 intent.putExtra("notifsPref", Boolean.toString(notif));
                 startActivity(intent);
 
-//                Intent resultIntent = new Intent();
-//                resultIntent.putExtra("studentID", Integer.toString(sp.getStudentID()));
-//                resultIntent.putExtra("notifsPref", Boolean.toString(notif));
-//                setResult(Activity.RESULT_OK, resultIntent);
-//                this.finish();
-
                 return true;
 
             case R.id.notification_toggle:
@@ -117,17 +113,14 @@ public class ProjectDetails extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setPhoto() {
         ImageView imgView = findViewById(R.id.img_projphoto);
-        String base64 = sp.getPhoto();
 
-        if (base64 != "null") {
+        if (photo.length != 0) {
             try {
-                byte[] bytes = Base64.getDecoder().decode(base64);
-                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(photo, 0, photo.length);
                 imgView.setImageBitmap(bitmap);
             } catch (Exception ex) {
                 Toast.makeText(getApplicationContext(), ex.toString(), Toast.LENGTH_SHORT).show();
             }
-
         }
     }
 
@@ -167,9 +160,10 @@ public class ProjectDetails extends AppCompatActivity {
         int year = Integer.parseInt(intent.getStringExtra("year")); //  this is iffy
         String first_name = intent.getStringExtra("first_name");
         String second_name = intent.getStringExtra("second_name");
-        String photo = intent.getStringExtra("photo");
+        //String photo = intent.getStringExtra("photo");
+        photo = intent.getByteArrayExtra("photo");
 
-        return new StudentProject(projectID, studentID, title, description, year, first_name, second_name, photo);
+        return new StudentProject(projectID, studentID, title, description, year, first_name, second_name, null);
     }
 
     private void goToUpdateProject() {
@@ -183,7 +177,7 @@ public class ProjectDetails extends AppCompatActivity {
         intent.putExtra("year", Integer.toString(sp.getYear()));
         intent.putExtra("first_name", sp.getFirst_name());
         intent.putExtra("second_name", sp.getSecond_name());
-        intent.putExtra("photo", sp.getPhoto());
+        intent.putExtra("photo", photo);
 
         intent.putExtra("notifsPref", Boolean.toString(notif));
 
