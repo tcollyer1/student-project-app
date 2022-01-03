@@ -79,19 +79,6 @@ public class UpdateProject extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
 
-//                Intent resultIntent = new Intent();
-//                resultIntent.putExtra("projectID", Integer.toString(sp.getProjectID()));
-//                resultIntent.putExtra("studentID", Integer.toString(sp.getStudentID()));
-//                resultIntent.putExtra("title", sp.getTitle());
-//                resultIntent.putExtra("description", sp.getDescription());
-//                resultIntent.putExtra("year", Integer.toString(sp.getYear()));
-//                resultIntent.putExtra("first_name", sp.getFirst_name());
-//                resultIntent.putExtra("second_name", sp.getSecond_name());
-//                resultIntent.putExtra("notifsPref", Boolean.toString(notifs));
-//
-//                setResult(Activity.RESULT_OK, resultIntent);
-//                this.finish();
-
                 intent = new Intent(getApplicationContext(), ProjectDetails.class);
                 intent.putExtra("projectID", Integer.toString(sp.getProjectID()));
                 intent.putExtra("studentID", Integer.toString(sp.getStudentID()));
@@ -166,7 +153,6 @@ public class UpdateProject extends AppCompatActivity {
         int year = Integer.parseInt(intent.getStringExtra("year")); //  this is iffy
         String first_name = intent.getStringExtra("first_name");
         String second_name = intent.getStringExtra("second_name");
-//        String photo = intent.getStringExtra("photo");
         photo = intent.getByteArrayExtra("photo");
 
         return new StudentProject(projectID, studentID, title, description, year, first_name, second_name, null);

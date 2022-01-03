@@ -30,7 +30,7 @@ public class Home extends AppCompatActivity {
         Button addProjectBtn = findViewById(R.id.btn_addProject);
 
         TextView welcomeTxt = findViewById(R.id.lbl_welcome_home);
-        Switch notifToggle = findViewById(R.id.swt_notificationtoggle);
+        SwitchCompat notifToggle = findViewById(R.id.swt_notificationtoggle);
 
         // Set switch to user's choice
         notifs = getNotifsPref();

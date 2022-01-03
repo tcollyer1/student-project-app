@@ -149,12 +149,12 @@ public class ViewProjects extends AppCompatActivity {
             progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             progressDialog.setMax(100);
             progressDialog.setProgress(0);
-//            progressDialog.show();
             progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     GetProjects.this.cancel(true);
                     dialog.dismiss();
+                    Toast.makeText(ViewProjects.this, "Project fetch cancelled", Toast.LENGTH_SHORT).show();
                 }
 
             });
@@ -163,19 +163,22 @@ public class ViewProjects extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
+            publishProgress(1);
             RequestQueue queue = Volley.newRequestQueue(ViewProjects.this);
             String apiURL = "http://web.socem.plymouth.ac.uk/COMP2000/api/students/";
-//            ListView listView = findViewById(R.id.listview);
 
             JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, apiURL, null,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
+                            publishProgress(2); // TODO: publishProgress works outside of onResponse(), but not inside
                             try {
                                 for (int i = 0; i < response.length(); i++) {
-                                    JSONObject project = response.getJSONObject(i);
 
-                                    if (i % (response.length() / 25) == 0) { // TODO: make this work
+                                    JSONObject project = response.getJSONObject(i);
+                                    publishProgress(3);
+
+                                    if (i % (response.length() / 25) == 0) {
                                         publishProgress(i * 100 / response.length());
                                     }
 
@@ -226,6 +229,7 @@ public class ViewProjects extends AppCompatActivity {
                             catch (Exception ex) {
                                 Toast.makeText(ViewProjects.this, "Something went wrong...", Toast.LENGTH_SHORT).show();
                             }
+                            publishProgress(100);
                         }
                     }, new Response.ErrorListener() {
                 public void onErrorResponse(VolleyError error) {
@@ -251,7 +255,7 @@ public class ViewProjects extends AppCompatActivity {
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
+            //super.onProgressUpdate(values);
             progressDialog.setProgress(values[0]);
         }
     }

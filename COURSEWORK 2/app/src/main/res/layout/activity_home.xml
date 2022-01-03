@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#7ED0F3"
     tools:context=".Home">
 
     <TextView
@@ -25,6 +26,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
+        android:backgroundTint="#0D9E14"
+        android:drawableLeft="@drawable/ic_baseline_add_24"
         android:text="Add a project"
         app:layout_constraintEnd_toEndOf="@+id/lbl_welcome_home"
         app:layout_constraintStart_toStartOf="@+id/lbl_welcome_home"
@@ -35,6 +38,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:backgroundTint="#198ED0"
         android:text="View projects"
         app:layout_constraintEnd_toEndOf="@+id/btn_addProject"
         app:layout_constraintStart_toStartOf="@+id/btn_addProject"
@@ -45,16 +49,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
+        android:backgroundTint="#0F4A8E"
         android:text="Log out"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/swt_notificationtoggle" />
 
-    <Switch
+    <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/swt_notificationtoggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        app:thumbTint="@drawable/switchcolour"
+        app:trackTint="@drawable/track"
 
         android:text="Notifications"
         app:layout_constraintEnd_toEndOf="parent"
