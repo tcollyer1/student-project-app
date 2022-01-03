@@ -68,11 +68,6 @@ public class AddProject extends AppCompatActivity {
                 intent.putExtra("studentID", Integer.toString(studentID));
                 intent.putExtra("notifsPref", Boolean.toString(notifs));
                 startActivity(intent);
-//                Intent resultIntent = new Intent();
-//                resultIntent.putExtra("studentID", Integer.toString(studentID));
-//                resultIntent.putExtra("notifsPref", Boolean.toString(notifs));
-//                setResult(Activity.RESULT_OK, resultIntent);
-//                this.finish();
 
                 return true;
 
@@ -141,10 +136,6 @@ public class AddProject extends AppCompatActivity {
         Context context = getApplicationContext();
         Intent intent = new Intent(context, Home.class);
 
-//        Intent goToProjects = new Intent(context, ViewProjects.class); // intent for going straight to projects on tap of notification
-//        goToProjects.putExtra("studentID", studentID);
-//        showNotification(goToProjects);
-
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("studentID", studentID);
         intent.putExtra("notifsPref", Boolean.toString(notifs));
@@ -169,7 +160,7 @@ public class AddProject extends AppCompatActivity {
             postData.put("First_Name", newSP.getFirst_name());
             postData.put("Second_Name", newSP.getSecond_name());
         } catch (Exception ex) {
-            Toast.makeText(AddProject.this, "oh no", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddProject.this, ex.toString(), Toast.LENGTH_SHORT).show();
             ex.printStackTrace();
         }
 

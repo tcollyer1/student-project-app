@@ -1,5 +1,6 @@
 package com.example.studentprojectapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -10,6 +11,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -29,11 +32,14 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 public class UpdateProject extends AppCompatActivity {
     private StudentProject sp;
     private StudentProject updatedSP;
     private boolean notifs;
+    private byte[] photo;
+    private int SELECT_IMAGE_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,15 @@ public class UpdateProject extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateProject();
+            }
+        });
+
+        Button uploadBtn = findViewById(R.id.btn_uploadphoto);
+
+        uploadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadPhoto();
             }
         });
     }
@@ -86,6 +101,9 @@ public class UpdateProject extends AppCompatActivity {
                 intent.putExtra("first_name", sp.getFirst_name());
                 intent.putExtra("second_name", sp.getSecond_name());
                 intent.putExtra("notifsPref", Boolean.toString(notifs));
+                intent.putExtra("photo", photo);
+
+                startActivity(intent);
 
                 return true;
 
@@ -110,6 +128,27 @@ public class UpdateProject extends AppCompatActivity {
         return true;
     }
 
+    private void uploadPhoto() {
+        Intent intent = new Intent();
+
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Title"), SELECT_IMAGE_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        TextView fileNameTxt = findViewById(R.id.lbl_filename);
+
+        if (requestCode == 1) {
+            Uri uri = data.getData();
+            fileNameTxt.setText(data.getData().getPath());
+//            Toast.makeText(this, "Photo received", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private boolean getNotifPref() {
         Intent intent = getIntent();
         boolean pref = Boolean.parseBoolean(intent.getStringExtra("notifsPref"));
@@ -127,9 +166,10 @@ public class UpdateProject extends AppCompatActivity {
         int year = Integer.parseInt(intent.getStringExtra("year")); //  this is iffy
         String first_name = intent.getStringExtra("first_name");
         String second_name = intent.getStringExtra("second_name");
-        String photo = intent.getStringExtra("photo");
+//        String photo = intent.getStringExtra("photo");
+        photo = intent.getByteArrayExtra("photo");
 
-        return new StudentProject(projectID, studentID, title, description, year, first_name, second_name, photo);
+        return new StudentProject(projectID, studentID, title, description, year, first_name, second_name, null);
     }
 
     private void setTextFields() {

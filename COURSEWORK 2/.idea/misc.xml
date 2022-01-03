@@ -3,11 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/drawable/ic_add_photo.xml" value="0.3140625" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/drawable/ic_photo.xml" value="0.3140625" />
         <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/layout/activity_add_project.xml" value="0.5" />
         <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/layout/activity_home.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/layout/activity_project_details.xml" value="0.33" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/layout/activity_update_project.xml" value="0.33" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/layout/activity_update_project.xml" value="0.48722316865417375" />
         <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/layout/activity_view_projects.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/menu/menu.xml" value="0.28072916666666664" />
       </map>

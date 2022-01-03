@@ -133,11 +133,12 @@
             android:id="@+id/btn_submitUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="32dp"
             android:text="Update"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/info_lname" />
+            app:layout_constraintTop_toBottomOf="@+id/lbl_filename" />
 
         <TextView
             android:id="@+id/info_id"
@@ -168,6 +169,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lbl_lname" />
+
+        <Button
+            android:id="@+id/btn_uploadphoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:drawableLeft="@drawable/ic_photo"
+            android:text="Upload image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info_lname" />
+
+        <TextView
+            android:id="@+id/lbl_filename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_uploadphoto" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
