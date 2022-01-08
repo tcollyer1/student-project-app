@@ -42,13 +42,14 @@ import java.util.ArrayList;
 import java.util.Base64;
 
 public class ViewProjects extends AppCompatActivity {
-    private ArrayList<String> projectHeaders = new ArrayList<>();
-    private ArrayList<StudentProject> studentProjects = new ArrayList<>();
+    private final ArrayList<String> projectHeaders = new ArrayList<>();
+    private final ArrayList<StudentProject> studentProjects = new ArrayList<>();
 
     private StudentProject sp;
     private int currentStudentID;
     private boolean notifs;
-    private ProgressDialog progressDialog;
+
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +60,10 @@ public class ViewProjects extends AppCompatActivity {
         currentStudentID = getStudentID();
         notifs = getNotifPref();
 
-        try {
-            GetProjects getProjects = new GetProjects();
-            getProjects.execute();
-        }
-        catch (Exception ex) {
-            Toast.makeText(ViewProjects.this, ex.toString(), Toast.LENGTH_SHORT).show();
-        }
+        listView = findViewById(R.id.listview);
+
+        GetProjects getProjects = new GetProjects();
+        getProjects.execute("");
     }
 
     @Override
@@ -138,17 +136,15 @@ public class ViewProjects extends AppCompatActivity {
 
     public class GetProjects extends AsyncTask<String, Integer, String> {
         String textViewStr;
-        //ProgressDialog progressDialog;
+        ProgressDialog progressDialog;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
             progressDialog = new ProgressDialog(ViewProjects.this);
             progressDialog.setMessage("Fetching projects, please wait...");
             progressDialog.setCancelable(false);
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            progressDialog.setMax(100);
-            progressDialog.setProgress(0);
             progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -156,14 +152,12 @@ public class ViewProjects extends AppCompatActivity {
                     dialog.dismiss();
                     Toast.makeText(ViewProjects.this, "Project fetch cancelled", Toast.LENGTH_SHORT).show();
                 }
-
             });
             progressDialog.show();
         }
 
         @Override
         protected String doInBackground(String... params) {
-            publishProgress(1);
             RequestQueue queue = Volley.newRequestQueue(ViewProjects.this);
             String apiURL = "http://web.socem.plymouth.ac.uk/COMP2000/api/students/";
 
@@ -171,16 +165,14 @@ public class ViewProjects extends AppCompatActivity {
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            publishProgress(2); // TODO: publishProgress works outside of onResponse(), but not inside
                             try {
                                 for (int i = 0; i < response.length(); i++) {
 
                                     JSONObject project = response.getJSONObject(i);
-                                    publishProgress(3);
 
-                                    if (i % (response.length() / 25) == 0) {
-                                        publishProgress(i * 100 / response.length());
-                                    }
+//                                    if (i % (response.length() / 25) == 0) {
+//                                        publishProgress(i * 100 / response.length());
+//                                    }
 
                                     int studentID = project.getInt("studentID");
 
@@ -209,27 +201,29 @@ public class ViewProjects extends AppCompatActivity {
                                     }
                                 }
 
-                                // This is the part with the ListView
-                                ListView listView = findViewById(R.id.listview);
-
-                                ArrayAdapter<String> adapter = new ArrayAdapter<>(ViewProjects.this, android.R.layout.simple_list_item_1, projectHeaders);
-
-                                listView.setAdapter(adapter);
-
-                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                    // position = pos of element we're clicking
-                                    @RequiresApi(api = Build.VERSION_CODES.O)
+                                listView.post(new Runnable() {
                                     @Override
-                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        goToProjectDetails(position);
+                                    public void run() {
+                                        ArrayAdapter<String> adapter = new ArrayAdapter<>(ViewProjects.this, android.R.layout.simple_list_item_1, projectHeaders);
+
+                                        listView.setAdapter(adapter);
+
+                                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                            // position = pos of element we're clicking
+                                            @RequiresApi(api = Build.VERSION_CODES.O)
+                                            @Override
+                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                goToProjectDetails(position);
+                                            }
+                                        });
                                     }
                                 });
+
 
                             }
                             catch (Exception ex) {
                                 Toast.makeText(ViewProjects.this, "Something went wrong...", Toast.LENGTH_SHORT).show();
                             }
-                            publishProgress(100);
                         }
                     }, new Response.ErrorListener() {
                 public void onErrorResponse(VolleyError error) {
@@ -253,11 +247,11 @@ public class ViewProjects extends AppCompatActivity {
             cancel(true);
         }
 
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            //super.onProgressUpdate(values);
-            progressDialog.setProgress(values[0]);
-        }
+//        @Override
+//        protected void onProgressUpdate(Integer... values) {
+//            super.onProgressUpdate(values);
+//            progressDialog.setProgress(values[0]);
+//        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
