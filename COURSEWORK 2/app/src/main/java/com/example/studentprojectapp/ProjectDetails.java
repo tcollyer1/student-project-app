@@ -160,7 +160,6 @@ public class ProjectDetails extends AppCompatActivity {
         int year = Integer.parseInt(intent.getStringExtra("year")); //  this is iffy
         String first_name = intent.getStringExtra("first_name");
         String second_name = intent.getStringExtra("second_name");
-        //String photo = intent.getStringExtra("photo");
         photo = intent.getByteArrayExtra("photo");
 
         return new StudentProject(projectID, studentID, title, description, year, first_name, second_name, null);
@@ -230,7 +229,7 @@ public class ProjectDetails extends AppCompatActivity {
 
                     }
                 }, new Response.ErrorListener() {
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(VolleyError error) { // Display success toast on error as API returns no response
                 Toast.makeText(ProjectDetails.this, "Project deleted.", Toast.LENGTH_SHORT).show();
             }
         });
@@ -250,7 +249,7 @@ public class ProjectDetails extends AppCompatActivity {
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "Project Created";
-            String description = "Notification to display when a project has been successfully added.";
+            String description = "Notification to display when a project has been successfully deleted.";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel("0", name, importance);
             channel.setDescription(description);

@@ -5,13 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,14 +32,20 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
-import org.w3c.dom.Text;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 public class UpdateProject extends AppCompatActivity {
     private StudentProject sp;
     private StudentProject updatedSP;
     private boolean notifs;
+    private boolean photoToBeUpdated = false;
+
     private byte[] photo;
-    private int SELECT_IMAGE_CODE = 1;
+    private Bitmap uploadedPhoto;
+    private byte[] uploadedPhotoBytes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +65,9 @@ public class UpdateProject extends AppCompatActivity {
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (photoToBeUpdated) {
+                    sendPhoto();
+                }
                 updateProject();
             }
         });
@@ -68,7 +77,12 @@ public class UpdateProject extends AppCompatActivity {
         uploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadPhoto();
+                if (!photoUploaded()) {
+                    uploadPhoto();
+                }
+                else {
+                    Toast.makeText(UpdateProject.this, "Photo already exists for this project.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -120,7 +134,18 @@ public class UpdateProject extends AppCompatActivity {
 
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Title"), SELECT_IMAGE_CODE);
+
+        startActivityForResult(Intent.createChooser(intent, "Choose an image"), 1);
+    }
+
+    private boolean photoUploaded() {
+        if (photo.length != 0) {
+            return true;
+        }
+
+        else {
+            return false;
+        }
     }
 
     @Override
@@ -131,8 +156,33 @@ public class UpdateProject extends AppCompatActivity {
 
         if (requestCode == 1) {
             Uri uri = data.getData();
-            fileNameTxt.setText(data.getData().getPath());
-//            Toast.makeText(this, "Photo received", Toast.LENGTH_SHORT).show();
+            String path = uri.getPath();
+
+            new Thread(new Runnable() { // New thread for uploading image from device
+                @Override
+                public void run() {
+                    try {
+                        InputStream inputStream = getContentResolver().openInputStream(uri);
+                        uploadedPhoto = BitmapFactory.decodeStream(inputStream);
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        uploadedPhoto.compress(Bitmap.CompressFormat.JPEG,80,stream);
+                        uploadedPhotoBytes = stream.toByteArray();
+
+                        fileNameTxt.post(new Runnable() { // Back to UI thread to update textview
+                            @Override
+                            public void run() {
+                                fileNameTxt.setText(path);
+                                photoToBeUpdated = true;
+                            }
+                        });
+                    }
+                    catch (FileNotFoundException e) {
+
+                    }
+                }
+            }).start();
+
+
         }
     }
 
@@ -160,7 +210,6 @@ public class UpdateProject extends AppCompatActivity {
 
     private void setTextFields() {
         String strYear = Integer.toString(sp.getYear());
-        String strID = Integer.toString(sp.getStudentID());
 
         getTextFieldData()[0].setText(sp.getTitle());
         getTextFieldData()[1].setText(sp.getDescription());
@@ -254,6 +303,41 @@ public class UpdateProject extends AppCompatActivity {
         }
     }
 
+    private void sendPhoto() {
+        RequestQueue queue = Volley.newRequestQueue(UpdateProject.this);
+
+        int projectID = sp.getProjectID();
+
+        String apiURL = "http://web.socem.plymouth.ac.uk/COMP2000/api/students/" + projectID + "/image";
+
+        JSONObject postImageData = new JSONObject();
+
+        try {
+            postImageData.put("StudentID", sp.getStudentID());
+            postImageData.put("file", uploadedPhotoBytes);
+
+        } catch (Exception ex) {
+            Toast.makeText(UpdateProject.this, ex.toString(), Toast.LENGTH_SHORT).show();
+            ex.printStackTrace();
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, apiURL, postImageData,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+//                        Toast.makeText(UpdateProject.this,response,Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(UpdateProject.this, "Photo submitted.",Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        queue.add(request);
+    }
+
     private void showNotification(Intent intent) {
 
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -281,7 +365,7 @@ public class UpdateProject extends AppCompatActivity {
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "Project Created";
-            String description = "Notification to display when a project has been successfully added.";
+            String description = "Notification to display when a project has been successfully updated.";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel("0", name, importance);
             channel.setDescription(description);

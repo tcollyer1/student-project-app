@@ -170,10 +170,6 @@ public class ViewProjects extends AppCompatActivity {
 
                                     JSONObject project = response.getJSONObject(i);
 
-//                                    if (i % (response.length() / 25) == 0) {
-//                                        publishProgress(i * 100 / response.length());
-//                                    }
-
                                     int studentID = project.getInt("studentID");
 
                                     if (studentID == currentStudentID) {
@@ -246,12 +242,6 @@ public class ViewProjects extends AppCompatActivity {
             super.onCancelled();
             cancel(true);
         }
-
-//        @Override
-//        protected void onProgressUpdate(Integer... values) {
-//            super.onProgressUpdate(values);
-//            progressDialog.setProgress(values[0]);
-//        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
