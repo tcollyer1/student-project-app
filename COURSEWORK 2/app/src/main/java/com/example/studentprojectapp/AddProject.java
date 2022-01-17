@@ -122,11 +122,24 @@ public class AddProject extends AppCompatActivity {
         return arr;
     }
 
+    private boolean validVals() {
+        EditText projectDetails[] = getTextFieldData().clone();
+
+        for (EditText field : projectDetails) {
+            if (field.getText().toString().equals("")) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     private void getValuesToPost() {
         EditText projectDetails[] = getTextFieldData().clone();
 
         try {
             newSP = new StudentProject(0, studentID, projectDetails[0].getText().toString(), projectDetails[1].getText().toString(), Integer.parseInt(projectDetails[2].getText().toString()), projectDetails[3].getText().toString(), projectDetails[4].getText().toString(), "null");
+
         } catch (Exception ex) {
 
         }
@@ -148,43 +161,49 @@ public class AddProject extends AppCompatActivity {
 
         String apiURL = "http://web.socem.plymouth.ac.uk/COMP2000/api/students/";
 
-        getValuesToPost(); // sets newSP object to inputted values
+        if (validVals()) {
+            // sets newSP object to inputted values
+            getValuesToPost();
 
-        JSONObject postData = new JSONObject();
+            JSONObject postData = new JSONObject();
 
-        try {
-            postData.put("StudentID", studentID);
-            postData.put("Title", newSP.getTitle());
-            postData.put("Description", newSP.getDescription());
-            postData.put("Year", newSP.getYear());
-            postData.put("First_Name", newSP.getFirst_name());
-            postData.put("Second_Name", newSP.getSecond_name());
-        } catch (Exception ex) {
-            Toast.makeText(AddProject.this, ex.toString(), Toast.LENGTH_SHORT).show();
-            ex.printStackTrace();
-        }
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, apiURL, postData,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                    }
-                }, new Response.ErrorListener() {
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(AddProject.this, "Submitted!", Toast.LENGTH_SHORT).show();
+            try {
+                postData.put("StudentID", studentID);
+                postData.put("Title", newSP.getTitle());
+                postData.put("Description", newSP.getDescription());
+                postData.put("Year", newSP.getYear());
+                postData.put("First_Name", newSP.getFirst_name());
+                postData.put("Second_Name", newSP.getSecond_name());
+            } catch (Exception ex) {
+                Toast.makeText(AddProject.this, ex.toString(), Toast.LENGTH_SHORT).show();
+                ex.printStackTrace();
             }
-        });
 
-        queue.add(request);
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, apiURL, postData,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
 
-        openHome(Integer.toString(studentID));
+                        }
+                    }, new Response.ErrorListener() {
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(AddProject.this, "Submitted!", Toast.LENGTH_SHORT).show();
+                }
+            });
 
-        if (notifs) {
-            Intent goToProjects = new Intent(getApplicationContext(), ViewProjects.class); // intent for going straight to projects on tap of notification
-            goToProjects.putExtra("studentID", Integer.toString(studentID));
-            goToProjects.putExtra("notifsPref", Boolean.toString(notifs));
-            showNotification(goToProjects);
+            queue.add(request);
+
+            openHome(Integer.toString(studentID));
+
+            if (notifs) {
+                Intent goToProjects = new Intent(getApplicationContext(), ViewProjects.class); // intent for going straight to projects on tap of notification
+                goToProjects.putExtra("studentID", Integer.toString(studentID));
+                goToProjects.putExtra("notifsPref", Boolean.toString(notifs));
+                showNotification(goToProjects);
+            }
+        }
+        else {
+            Toast.makeText(AddProject.this, "Please fill in all form details.", Toast.LENGTH_SHORT).show();
         }
     }
 
