@@ -158,9 +158,6 @@ public class UpdateProject extends AppCompatActivity {
             Uri uri = data.getData();
             String path = uri.getPath();
 
-            new Thread(new Runnable() { // New thread for uploading image from device
-                @Override
-                public void run() {
                     try {
                         InputStream inputStream = getContentResolver().openInputStream(uri);
                         uploadedPhoto = BitmapFactory.decodeStream(inputStream);
@@ -168,21 +165,12 @@ public class UpdateProject extends AppCompatActivity {
                         uploadedPhoto.compress(Bitmap.CompressFormat.JPEG,80,stream);
                         uploadedPhotoBytes = stream.toByteArray();
 
-                        fileNameTxt.post(new Runnable() { // Back to UI thread to update textview
-                            @Override
-                            public void run() {
-                                fileNameTxt.setText(path);
-                                photoToBeUpdated = true;
-                            }
-                        });
+                        fileNameTxt.setText(path);
+                        photoToBeUpdated = true;
                     }
                     catch (FileNotFoundException e) {
 
                     }
-                }
-            }).start();
-
-
         }
     }
 
@@ -321,21 +309,30 @@ public class UpdateProject extends AppCompatActivity {
             ex.printStackTrace();
         }
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, apiURL, postImageData,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-//                        Toast.makeText(UpdateProject.this,response,Toast.LENGTH_LONG).show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(UpdateProject.this, "Photo submitted.",Toast.LENGTH_LONG).show();
-                    }
-                });
+        new Thread(new Runnable() { // Thread in place to send photo to API - photo does not actually upload as the image upload cannot be done using JSON data.
+            @Override
+            public void run() {
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, apiURL, postImageData,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
 
-        queue.add(request);
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                UpdateProject.this.runOnUiThread(new Runnable() { // Back to UI thread to display toast message
+                                    public void run() {
+                                        Toast.makeText(UpdateProject.this, "Photo submitted.", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                        });
+
+                queue.add(request);
+            }
+        }).start();
     }
 
     private void showNotification(Intent intent) {
