@@ -11,6 +11,7 @@
         android:id="@+id/lbl_welcome_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="casual"
         android:text="Text to replace"
         android:textAlignment="center"
         android:textColor="#000000"
@@ -26,7 +27,7 @@
         android:id="@+id/btn_addProject"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="40dp"
         android:layout_weight=".75"
         android:backgroundTint="#07870D"
         android:drawableLeft="@drawable/ic_baseline_add_24"
@@ -50,7 +51,7 @@
         android:id="@+id/btn_logOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="#0F4A8E"
         android:text="Log out"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,12 +62,12 @@
         android:id="@+id/swt_notificationtoggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:thumbTint="@drawable/switchcolour"
-        app:trackTint="@drawable/track"
-
+        android:layout_marginTop="40dp"
         android:text="Notifications"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_viewProjects" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_viewProjects"
+        app:thumbTint="@drawable/switchcolour"
+        app:trackTint="@drawable/track" />
 </androidx.constraintlayout.widget.ConstraintLayout>
