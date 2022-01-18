@@ -17,6 +17,7 @@
             android:id="@+id/lbl_addProject_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="casual"
             android:text="Add Project"
             android:textColor="#000000"
             android:textSize="32sp"
