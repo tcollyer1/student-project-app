@@ -173,6 +173,7 @@
             android:id="@+id/img_projphoto"
             android:layout_width="700px"
             android:layout_height="500px"
+            android:src="@drawable/nophoto"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lbl_photo_details" />
