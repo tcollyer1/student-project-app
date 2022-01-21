@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -35,9 +34,6 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
-import java.util.Base64;
-
 public class ProjectDetails extends AppCompatActivity {
     private StudentProject sp;
     private boolean notif;
@@ -54,7 +50,7 @@ public class ProjectDetails extends AppCompatActivity {
         sp = getProjectInfo();
         notif = getNotifPref();
 
-        setEditTexts();
+        setTextViews();
 
         setPhoto();
 
@@ -131,7 +127,7 @@ public class ProjectDetails extends AppCompatActivity {
         return pref;
     }
 
-    private void setEditTexts() {
+    private void setTextViews() {
         TextView idTxt = findViewById(R.id.lbl_id_value);
         TextView titleTxt = findViewById(R.id.lbl_title_value);
         TextView descriptionTxt = findViewById(R.id.lbl_description_value);
