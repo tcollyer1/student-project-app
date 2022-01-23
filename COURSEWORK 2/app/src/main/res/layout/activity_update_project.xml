@@ -183,6 +183,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:backgroundTint="#356CB1"
             android:drawableLeft="@drawable/ic_photo"
             android:text="Upload image"
             app:layout_constraintEnd_toEndOf="parent"
