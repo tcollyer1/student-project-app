@@ -22,8 +22,8 @@ Key features include:
 - push notifications on project upload/update/delete, which are toggleable by the user
 - snackbar/toast messages for user feedback
 
-# Demo Video
+### Demo Video
 https://www.youtube.com/watch?v=Mugm8kTcTr0
 
-# Resources
+### Resources
 [Volley library](https://github.com/google/volley)
