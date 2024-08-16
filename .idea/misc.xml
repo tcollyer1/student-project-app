@@ -3,45 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/drawable/gradient_bg.xml" value="0.3828125" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_accommodation.xml" value="0.33" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_accommodation_pg2.xml" value="0.33" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_accommodation_pg3.xml" value="0.33" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_barn.xml" value="0.33" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_bookings.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_create_booking.xml" value="0.33" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_create_booking_pg2.xml" value="0.36186594202898553" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_farmhouse_bedrooms.xml" value="0.33" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_main.xml" value="0.36594202898550726" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_shepherds_hut.xml" value="0.33" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_view_current_booking.xml" value="0.2994791666666667" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_view_current_bookings.xml" value="0.36594202898550726" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_view_past_booking.xml" value="0.2994791666666667" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/activity_view_past_bookings.xml" value="0.36594202898550726" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/fragment_create_booking.xml" value="0.36594202898550726" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/fragment_home.xml" value="0.36594202898550726" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/layout/fragment_view_bookings.xml" value="0.36594202898550726" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Attempt With Nav/Prototype/app/src/main/res/menu/bottom_menuhome.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Prototype/app/src/main/res/layout/activity_accommodation.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Prototype/app/src/main/res/layout/activity_create_booking.xml" value="0.33" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Prototype/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Prototype/app/src/main/res/layout/activity_view_current_bookings.xml" value="0.29739583333333336" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/Prototype/app/src/main/res/layout/activity_view_past_bookings.xml" value="0.29739583333333336" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.346875" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/app/src/main/res/layout/activity_accommodation.xml" value="0.2994791666666667" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/app/src/main/res/layout/activity_accommodation_pg2.xml" value="0.2994791666666667" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/app/src/main/res/layout/activity_accommodation_pg3.xml" value="0.2994791666666667" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/app/src/main/res/layout/activity_barn.xml" value="0.2994791666666667" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/app/src/main/res/layout/activity_bookings.xml" value="0.2994791666666667" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/app/src/main/res/layout/activity_create_booking.xml" value="0.2994791666666667" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/app/src/main/res/layout/activity_create_booking_pg2.xml" value="0.32395833333333335" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/app/src/main/res/layout/activity_farmhouse_bedrooms.xml" value="0.3385416666666667" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/app/src/main/res/layout/activity_main.xml" value="0.3234375" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/app/src/main/res/layout/activity_shepherds_hut.xml" value="0.3145833333333333" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/app/src/main/res/layout/activity_view_current_booking.xml" value="0.290625" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/app/src/main/res/layout/activity_view_past_booking.xml" value="0.3307291666666667" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/app/src/main/res/menu/bottom_menu.xml" value="0.2578125" />
-        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/app/src/main/res/menu/bottom_menuhome.xml" value="0.3223958333333333" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/drawable/ic_add_photo.xml" value="0.3140625" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.3125" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/drawable/ic_photo.xml" value="0.3140625" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/drawable/switchcolour.xml" value="0.3125" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/drawable/track.xml" value="0.3125" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/layout/activity_add_project.xml" value="0.25" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/layout/activity_home.xml" value="0.33" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/layout/activity_project_details.xml" value="0.33" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/layout/activity_update_project.xml" value="0.25" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/layout/activity_view_projects.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/taren/Documents/Plymouth/YEAR 2/COMP2000/COURSEWORK/comp2000-main-assignment-tcollyer1/COURSEWORK 2/app/src/main/res/menu/menu.xml" value="0.28072916666666664" />
       </map>
     </option>
   </component>
